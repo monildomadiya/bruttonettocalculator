@@ -250,25 +250,24 @@ export default function Header() {
       {searchOpen && <SearchModal onClose={() => setSearchOpen(false)} />}
 
       <header className="site-header">
-        <div className="page-wrap header-inner-wrap">
+        <div className="header-inner-wrap">
           <div className="site-header-inner">
 
-            {/* ── Logo — plain span, no SVG text tag ── */}
+            {/* ── Logo ── */}
             <Link href="/" className="logo" onClick={closeAll} aria-label="Startseite">
-              <span className="logo-icon-text" aria-hidden="true">&#8364;</span>
-              <span className="logo-text">bruttonettocalculator</span>
+              <span className="logo-icon-bg"><span className="logo-icon-text">&#8364;</span></span>
+              <span className="logo-name">bruttonettocalculator</span>
             </Link>
 
-            {/* ── Desktop Nav — pure CSS :hover, zero JS state ── */}
+            {/* ── Desktop Nav ── */}
             <nav className="header-nav" aria-label="Hauptnavigation">
               {NAV_GROUPS.map((group) => (
-                <div key={group.label} className="nav-group">
-                  <button className="nav-link">
+                <div key={group.label} className="nav-item">
+                  <button className="nav-item-btn">
                     {group.label}
-                    <span className="nav-chevron"><ChevronDown /></span>
+                    <ChevronDown />
                   </button>
                   <div className="nav-dropdown" role="menu">
-                    <div className="nav-dropdown-title">{group.label}</div>
                     {group.items.map((item) => (
                       <Link key={item.href} href={item.href} className="nav-dropdown-item" role="menuitem" onClick={closeAll}>
                         <span className="nav-dropdown-label">{item.label}</span>
@@ -283,14 +282,14 @@ export default function Header() {
             {/* ── Right actions ── */}
             <div className="header-actions">
               <button className="header-search-pill" onClick={() => setSearchOpen(true)} aria-label="Suchen">
-                <SearchIcon size={13} />
+                <SearchIcon size={14} />
                 <span className="search-pill-text">Suchen...</span>
-                <kbd className="search-pill-kbd">/</kbd>
+                <kbd style={{ marginLeft: "6px", fontSize: "10px", opacity: 0.6 }}>/</kbd>
               </button>
-              <button className="h-icon-btn" onClick={toggle} aria-label={isDark ? "Hellmodus" : "Dunkelmodus"}>
+              <button className="header-icon-btn" onClick={toggle} aria-label={isDark ? "Hellmodus" : "Dunkelmodus"}>
                 {isDark ? <SunIcon /> : <MoonIcon />}
               </button>
-              <button className="h-icon-btn mobile-menu-btn" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Menu">
+              <button className="header-icon-btn mobile-menu-btn" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Menu">
                 {mobileOpen ? <CloseIcon /> : <HamburgerIcon />}
               </button>
             </div>
@@ -298,41 +297,27 @@ export default function Header() {
         </div>
 
         {/* ── Mobile Drawer ── */}
-        {mobileOpen && (
-          <div className="mobile-menu" role="dialog" aria-modal="true">
-            <div className="mobile-search-row">
-              <button className="mobile-search-trigger" onClick={() => { setMobileOpen(false); setSearchOpen(true); }}>
-                <SearchIcon size={14} />
-                <span>Rechner suchen...</span>
-              </button>
-            </div>
-            <div className="mobile-menu-inner">
-              {NAV_GROUPS.map((group) => (
-                <div key={group.label} className="mobile-group">
-                  <button
-                    className="mobile-group-title"
-                    onClick={() => setMobileExpanded(mobileExpanded === group.label ? null : group.label)}
-                  >
-                    {group.label}
-                    <span className={`nav-chevron${mobileExpanded === group.label ? " open" : ""}`}>
-                      <ChevronDown />
-                    </span>
-                  </button>
-                  {mobileExpanded === group.label && (
-                    <div className="mobile-group-items">
-                      {group.items.map((item) => (
-                        <Link key={item.href} href={item.href} className="mobile-menu-item" onClick={closeAll}>
-                          <span className="mobile-item-label">{item.label}</span>
-                          <span className="mobile-item-desc">{item.desc}</span>
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
+        <div className={`mobile-menu ${mobileOpen ? "open" : ""}`} role="dialog" aria-modal="true">
+          <div className="mobile-menu-inner">
+            <button 
+              onClick={() => { setMobileOpen(false); setSearchOpen(true); }}
+              style={{ display: "flex", alignItems: "center", gap: "10px", width: "100%", padding: "12px", background: "var(--bg-tag)", border: "none", borderRadius: "6px", color: "var(--text)", fontSize: "14px", marginBottom: "20px" }}
+            >
+              <SearchIcon size={16} /> Rechner suchen...
+            </button>
+            
+            {NAV_GROUPS.map((group) => (
+              <div key={group.label} className="mobile-menu-section">
+                <div className="mobile-menu-title">{group.label}</div>
+                {group.items.map((item) => (
+                  <Link key={item.href} href={item.href} className="mobile-menu-link" onClick={closeAll}>
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            ))}
           </div>
-        )}
+        </div>
       </header>
     </>
   );
