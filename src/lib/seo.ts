@@ -5,7 +5,7 @@ export const YEAR = new Date().getFullYear();
 export const NEXT_YEAR = YEAR + 1;
 
 export const SITE_NAME = "bruttonettocalculator";
-export const SITE_URL = "https://bruttonettocalculator.com";
+export const SITE_URL  = "https://bruttonettocalculator.com";
 
 // Reusable canonical builder
 export const canonical = (path: string) => `${SITE_URL}${path}`;
@@ -15,7 +15,7 @@ export function seoTitle(name: string, keywords?: string) {
   return `${name} ${YEAR}/${NEXT_YEAR} | ${keywords ? keywords + " – " : ""}${SITE_NAME}`;
 }
 
-// Common German payroll keywords
+// ─── GLOBAL KEYWORD POOL ───────────────────────────────────────────────────
 export const GLOBAL_KEYWORDS = [
   "Brutto Netto Rechner",
   `Gehaltsrechner ${YEAR}`,
@@ -25,91 +25,111 @@ export const GLOBAL_KEYWORDS = [
   `Gehalt ${YEAR}`,
   "Deutschland",
   "kostenlos online",
+  "Steuerrechner Deutschland",
+  "Lohnrechner",
+  `Steuer ${YEAR}`,
 ];
 
-// Per-calculator SEO config
+// ─── PER-CALCULATOR SEO CONFIG ─────────────────────────────────────────────
 export const CALCULATOR_SEO: Record<string, {
-  title: string;
+  title:       string;
   description: string;
-  keywords: string[];
-  path: string;
+  keywords:    string[];
+  path:        string;
 }> = {
+
   hub: {
-    title: `Brutto-Netto-Rechner & Finanzrechner Hub ${YEAR}`,
-    description: `Kostenlose Finanz- & Gehaltsrechner. Berechnen Sie Ihr Nettogehalt, Steuern und Sozialabgaben präzise und ohne Anmeldung. Offizielle Formeln ${YEAR}.`,
-    keywords: ["Finanzrechner", "Gehaltsrechner", "Alle Rechner", "Brutto Netto Hub", "Steuerrechner"],
-    path: "/",
+    title:       `Kostenlose Finanz- & Gehaltsrechner ${YEAR} | bruttonettocalculator.com`,
+    description: `Alle kostenlosen Finanz- & Lohnrechner auf einen Blick: Brutto-Netto, Stundenlohn, Firmenwagen, Rente, Kurzarbeitergeld & mehr. Offizielle Formeln ${YEAR} – keine Anmeldung.`,
+    keywords:    ["Finanzrechner", "Gehaltsrechner", "Alle Rechner", "Brutto Netto Hub", "Steuerrechner", "Lohnrechner Deutschland", `Finanztools ${YEAR}`],
+    path:        "/",
   },
+
   home: {
-    title: `Brutto-Netto-Rechner ${YEAR}/${NEXT_YEAR} | Nettogehalt sofort berechnen – kostenlos`,
-    description: `✓ Brutto-Netto-Rechner ${YEAR}: Nettogehalt sekundenschnell berechnen. Lohnsteuer, alle 6 Steuerklassen, Sozialabgaben ${YEAR}/${NEXT_YEAR}. Keine Anmeldung nötig.`,
-    keywords: ["Brutto Netto Rechner", "Nettogehalt berechnen", "Gehaltsrechner", `Lohnsteuer ${YEAR}`, "Steuerklassen", "Sozialabgaben"],
-    path: "/brutto-netto-rechner",
+    title:       `Brutto-Netto-Rechner ${YEAR}/${NEXT_YEAR} | Nettogehalt sofort berechnen – kostenlos`,
+    description: `Brutto-Netto-Rechner ${YEAR}: Nettogehalt in Sekunden berechnen. Alle 6 Steuerklassen, Lohnsteuer, Solidaritätszuschlag & Sozialabgaben ${YEAR}/${NEXT_YEAR}. Kostenlos & ohne Anmeldung.`,
+    keywords:    [
+      "Brutto Netto Rechner", "Nettogehalt berechnen", `Gehaltsrechner ${YEAR}`,
+      `Lohnsteuer ${YEAR}`, "Steuerklassen", "Sozialabgaben", "Nettolohn berechnen",
+      "Brutto Netto ${YEAR}", "Gehaltsabrechnung", "Lohnabrechnung online",
+    ],
+    path:        "/brutto-netto-rechner",
   },
+
   "netto-brutto": {
-    title: `Netto-Brutto-Rechner ${YEAR} | Wunsch-Netto zu Brutto umrechnen`,
-    description: `Netto-Brutto-Rechner ${YEAR}: Welches Bruttogehalt brauchen Sie für Ihr Wunsch-Netto? Kostenlose Rückrechnung mit Steuerklasse & Sozialabgaben.`,
-    keywords: ["Netto Brutto Rechner", "Bruttogehalt berechnen", "Wunsch Netto", "Rückrechnung Gehalt"],
-    path: "/netto-brutto",
+    title:       `Netto-Brutto-Rechner ${YEAR} | Wunsch-Netto zu Brutto umrechnen`,
+    description: `Netto-Brutto-Rechner ${YEAR}: Welches Bruttogehalt brauchen Sie für Ihr Wunsch-Netto? Rückrechnung mit allen Steuerklassen & Sozialabgaben – kostenlos & sofort.`,
+    keywords:    ["Netto Brutto Rechner", "Bruttogehalt berechnen", "Wunsch Netto", "Rückrechnung Gehalt", `Netto zu Brutto ${YEAR}`, "Gehalt rückrechnen"],
+    path:        "/netto-brutto",
   },
+
   stundenlohn: {
-    title: `Stundenlohnrechner ${YEAR} | Monatsgehalt in Stundenlohn umrechnen`,
-    description: `Stundenlohnrechner ${YEAR}: Berechnen Sie Ihren Stundenlohn aus dem Bruttomonatsgehalt. Mindestlohn ${YEAR} Check inklusive – sofort & kostenlos.`,
-    keywords: ["Stundenlohnrechner", "Stundenlohn berechnen", "Monatsgehalt umrechnen", `Mindestlohn ${YEAR}`],
-    path: "/stundenlohn",
+    title:       `Stundenlohnrechner ${YEAR} | Monatsgehalt in Stundenlohn umrechnen`,
+    description: `Stundenlohnrechner ${YEAR}: Ihren Stundenlohn aus Bruttojahresgehalt oder Monatsgehalt berechnen. Mindestlohn ${YEAR} prüfen – einfach, sofort & kostenlos.`,
+    keywords:    ["Stundenlohnrechner", "Stundenlohn berechnen", "Monatsgehalt umrechnen", `Mindestlohn ${YEAR}`, "Stundensatz berechnen", "Jahresgehalt in Stundenlohn"],
+    path:        "/stundenlohn",
   },
+
   firmenwagen: {
-    title: `Firmenwagenrechner ${YEAR} | Geldwerter Vorteil 1% Regelung berechnen`,
-    description: `Firmenwagenrechner ${YEAR}: Geldwerten Vorteil nach der 1%-, 0,5%- oder 0,25%-Regelung berechnen. Dienstwagen-Steuer für Verbrenner, Hybrid & E-Auto.`,
-    keywords: ["Firmenwagenrechner", "Geldwerter Vorteil", "1% Regelung", "Dienstwagen versteuern", "Elektroauto Firmenwagen"],
-    path: "/firmenwagen",
+    title:       `Firmenwagenrechner ${YEAR} | Geldwerter Vorteil 1%-Regel berechnen`,
+    description: `Firmenwagenrechner ${YEAR}: Geldwerten Vorteil nach 1%-, 0,5%- & 0,25%-Regelung sofort berechnen. Dienstwagen-Steuer für Verbrenner, Hybrid & Elektroauto ${YEAR}.`,
+    keywords:    ["Firmenwagenrechner", "Geldwerter Vorteil", "1% Regelung", "Dienstwagen versteuern", `Firmenwagen Steuer ${YEAR}`, "Elektroauto Firmenwagen", "Fahrtenbuch Rechner"],
+    path:        "/firmenwagen",
   },
+
   kurzarbeitergeld: {
-    title: `Kurzarbeitergeld Rechner ${YEAR} | KUG Anspruch berechnen`,
-    description: `Kurzarbeitergeld Rechner ${YEAR}: Berechnen Sie Ihren KUG-Anspruch (60% oder 67%) schnell und einfach. Kurzarbeit ${YEAR} – Alle Infos & Formeln.`,
-    keywords: ["Kurzarbeitergeld Rechner", "KUG berechnen", "Kurzarbeit Anspruch", `Kurzarbeitergeld ${YEAR}`],
-    path: "/kurzarbeitergeld",
+    title:       `Kurzarbeitergeld Rechner ${YEAR} | KUG Anspruch & Höhe berechnen`,
+    description: `Kurzarbeitergeld Rechner ${YEAR}: KUG-Anspruch nach 60% oder 67% (mit Kind) sofort berechnen. Offizielle Berechnungsformel der BA – kostenlos & aktuell.`,
+    keywords:    ["Kurzarbeitergeld Rechner", "KUG berechnen", "Kurzarbeit Anspruch", `Kurzarbeitergeld ${YEAR}`, "Kurzarbeit Berechnung", "Arbeitsagentur KUG"],
+    path:        "/kurzarbeitergeld",
   },
+
   arbeitslosengeld: {
-    title: `Arbeitslosengeld Rechner (ALG 1) ${YEAR} | ALG I Anspruch berechnen`,
-    description: `ALG 1 Rechner ${YEAR}: Wie viel Arbeitslosengeld I bekomme ich? Berechnung nach 60% / 67%-Satz & Steuerklasse. Einfach & kostenlos online.`,
-    keywords: ["Arbeitslosengeld Rechner", "ALG 1 berechnen", "Arbeitslosengeld I", `ALG Anspruch ${YEAR}`],
-    path: "/arbeitslosengeld",
+    title:       `Arbeitslosengeld-Rechner (ALG 1) ${YEAR} | ALG I Anspruch berechnen`,
+    description: `ALG 1 Rechner ${YEAR}: Wie viel Arbeitslosengeld I erhalte ich? Berechnung nach 60% / 67%-Satz & Steuerklasse. Leistungsentgelt & Bezugsdauer sofort ermitteln.`,
+    keywords:    ["Arbeitslosengeld Rechner", "ALG 1 berechnen", "Arbeitslosengeld I", `ALG Anspruch ${YEAR}`, "ALG 1 Bezugsdauer", "Leistungsentgelt berechnen"],
+    path:        "/arbeitslosengeld",
   },
+
   rente: {
-    title: `Rentenrechner ${YEAR} | Gesetzliche Rente & Rentenlücke berechnen`,
-    description: `Rentenrechner ${YEAR}: Wie hoch wird meine Rente? Berechnen Sie Ihre voraussichtliche gesetzliche Altersrente, Rentenpunkte & Versorgungslücke.`,
-    keywords: ["Rentenrechner", "Rente berechnen", "Rentenlücke", "gesetzliche Rente", `Rentenpunkte ${YEAR}`],
-    path: "/rente",
+    title:       `Rentenrechner ${YEAR} | Gesetzliche Rente & Rentenlücke berechnen`,
+    description: `Rentenrechner ${YEAR}: Wie hoch wird meine gesetzliche Rente? Altersrente, Rentenpunkte & Versorgungslücke kostenlos online ermitteln. Rentenwert ${YEAR}: 37,60 €.`,
+    keywords:    ["Rentenrechner", "Rente berechnen", "Rentenlücke", "gesetzliche Rente", `Rentenpunkte ${YEAR}`, "Altersrente berechnen", `Rentenwert ${YEAR}`],
+    path:        "/rente",
   },
+
   rentenpunkte: {
-    title: `Rentenpunkte Rechner ${YEAR} | Entgeltpunkte pro Jahr berechnen`,
-    description: `Rentenpunkte Rechner ${YEAR}: Berechnen Sie Ihre jährlichen Entgeltpunkte. Aktueller Rentenwert ${YEAR}: 37,60 €. Durchschnittsentgelt & Punkte sofort ermitteln.`,
-    keywords: ["Rentenpunkte berechnen", "Entgeltpunkte", `Rentenwert ${YEAR}`, "Rentenpunkte Rechner"],
-    path: "/rentenpunkte",
+    title:       `Rentenpunkte Rechner ${YEAR} | Entgeltpunkte pro Jahr berechnen`,
+    description: `Rentenpunkte Rechner ${YEAR}: Jährliche Entgeltpunkte aus Ihrem Bruttogehalt berechnen. Aktueller Rentenwert ${YEAR}: 37,60 €. Punkte & monatliche Rente sofort ermitteln.`,
+    keywords:    ["Rentenpunkte berechnen", "Entgeltpunkte", `Rentenwert ${YEAR}`, "Rentenpunkte Rechner", "Rentenberechnung", "Entgeltpunkte Rechner"],
+    path:        "/rentenpunkte",
   },
+
   arbeitgeber: {
-    title: `Arbeitgeberrechner ${YEAR} | Lohnkosten & Lohnnebenkosten berechnen`,
-    description: `Arbeitgeberrechner ${YEAR}: Gesamte Personalkosten & Lohnnebenkosten (AG-Anteile) berechnen. Wie viel kostet ein Mitarbeiter wirklich? Inkl. U1, U2, U3.`,
-    keywords: ["Arbeitgeberrechner", "Lohnnebenkosten berechnen", "Personalkosten", `Arbeitgeberanteil ${YEAR}`],
-    path: "/arbeitgeber",
+    title:       `Arbeitgeberrechner ${YEAR} | Lohnkosten & Lohnnebenkosten berechnen`,
+    description: `Arbeitgeberrechner ${YEAR}: Gesamte Personalkosten & Lohnnebenkosten (AG-Anteile KV, RV, AV, PV, U1, U2) berechnen. Was kostet ein Mitarbeiter wirklich? Sofort & kostenlos.`,
+    keywords:    ["Arbeitgeberrechner", "Lohnnebenkosten berechnen", "Personalkosten", `Arbeitgeberanteil ${YEAR}`, "AG Anteil Sozialversicherung", "Mitarbeiterkosten"],
+    path:        "/arbeitgeber",
   },
+
   pendlerpauschale: {
-    title: `Pendlerpauschale Rechner ${YEAR} | Entfernungspauschale berechnen`,
-    description: `Pendlerpauschale ${YEAR}: Berechnen Sie Ihre Entfernungspauschale (30 Ct. / 38 Ct. ab 21. km). Werbungskosten für den Arbeitsweg einfach ermitteln.`,
-    keywords: ["Pendlerpauschale Rechner", "Entfernungspauschale berechnen", "Fahrtkosten absetzen", `Pendlerpauschale ${YEAR}`],
-    path: "/pendlerpauschale",
+    title:       `Pendlerpauschale Rechner ${YEAR} | Entfernungspauschale berechnen`,
+    description: `Pendlerpauschale ${YEAR}: Entfernungspauschale (30 Ct. / 38 Ct. ab 21. km) & jährliche Steuerersparnis sofort berechnen. Werbungskosten für den Arbeitsweg optimal nutzen.`,
+    keywords:    ["Pendlerpauschale Rechner", "Entfernungspauschale berechnen", "Fahrtkosten absetzen", `Pendlerpauschale ${YEAR}`, "Werbungskosten Arbeitsweg", "Fahrkostenpauschale"],
+    path:        "/pendlerpauschale",
   },
+
   schenkungssteuer: {
-    title: `Schenkungssteuer Rechner ${YEAR} | Freibeträge & Steuerlast berechnen`,
-    description: `Schenkungssteuer ${YEAR}: Steuerfreibeträge, Steuerklassen & Steuersätze bei Schenkungen berechnen. Kinder: 400.000 €, Ehegatte: 500.000 € – alle 10 Jahre.`,
-    keywords: ["Schenkungssteuer Rechner", "Schenkung Freibetrag", "Schenkungssteuer berechnen", "Erbschaftsteuer"],
-    path: "/schenkungssteuer",
+    title:       `Schenkungssteuer Rechner ${YEAR} | Freibeträge & Steuerlast berechnen`,
+    description: `Schenkungssteuer ${YEAR}: Alle Freibeträge (Kind: 400.000 €, Ehegatte: 500.000 €), Steuerklassen & Steuersätze bei Schenkungen berechnen. Alle 10 Jahre neu – jetzt ermitteln.`,
+    keywords:    ["Schenkungssteuer Rechner", "Schenkung Freibetrag", "Schenkungssteuer berechnen", "Erbschaftsteuer", `Schenkungssteuer ${YEAR}`, "Schenkungsfreibetrag Kinder"],
+    path:        "/schenkungssteuer",
   },
+
   urlaubsgeld: {
-    title: `Urlaubsgeldrechner ${YEAR} | Netto-Urlaubsgeld sofort berechnen`,
-    description: `Urlaubsgeldrechner ${YEAR}: Wie viel Netto bleibt vom Urlaubsgeld? Berechnen Sie die genauen Steuer- & SV-Abzüge auf Ihre Sonderzahlung.`,
-    keywords: ["Urlaubsgeldrechner", "Urlaubsgeld Netto", "Sonderzahlung versteuern", `Urlaubsgeld ${YEAR}`],
-    path: "/urlaubsgeld",
+    title:       `Urlaubsgeldrechner ${YEAR} | Netto-Urlaubsgeld sofort berechnen`,
+    description: `Urlaubsgeldrechner ${YEAR}: Wie viel Netto bleibt vom Urlaubsgeld? Steuer- & SV-Abzüge auf Ihre Sonderzahlung nach Steuerklasse sofort & kostenlos berechnen.`,
+    keywords:    ["Urlaubsgeldrechner", "Urlaubsgeld Netto", "Sonderzahlung versteuern", `Urlaubsgeld ${YEAR}`, "Urlaubsgeld Berechnung", "Netto Urlaubsgeld"],
+    path:        "/urlaubsgeld",
   },
 };

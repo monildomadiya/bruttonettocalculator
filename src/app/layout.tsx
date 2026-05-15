@@ -23,82 +23,122 @@ export const metadata: Metadata = {
   },
   description: s.description,
   keywords: [...GLOBAL_KEYWORDS, ...s.keywords].join(", "),
-  authors: [{ name: SITE_NAME }],
-  creator: SITE_NAME,
+  authors:   [{ name: SITE_NAME, url: SITE_URL }],
+  creator:   SITE_NAME,
   publisher: SITE_NAME,
   metadataBase: new URL(SITE_URL),
   alternates: {
     canonical: "/",
     languages: {
       "de-DE": "/",
-      "de": "/",
+      "de":    "/",
     },
   },
 
   openGraph: {
-    title: s.title,
+    title:       s.title,
     description: s.description,
-    url: SITE_URL,
-    siteName: SITE_NAME,
-    locale: "de_DE",
-    type: "website",
+    url:         SITE_URL,
+    siteName:    SITE_NAME,
+    locale:      "de_DE",
+    type:        "website",
+    images: [{
+      url:    `${SITE_URL}/og-image.png`,
+      width:  1200,
+      height: 630,
+      alt:    `${SITE_NAME} – Brutto-Netto-Rechner & Finanztools Deutschland ${YEAR}`,
+    }],
   },
 
   twitter: {
-    card: "summary_large_image",
-    title: s.title,
+    card:        "summary_large_image",
+    title:       s.title,
     description: s.description,
+    images:      [`${SITE_URL}/og-image.png`],
   },
 
   robots: {
-    index: true,
+    index:  true,
     follow: true,
     googleBot: {
-      index: true,
+      index:  true,
       follow: true,
       "max-video-preview": -1,
       "max-image-preview": "large",
-      "max-snippet": -1,
+      "max-snippet":       -1,
     },
   },
 
   other: {
-    "dc.title": s.title,
+    "dc.title":       s.title,
     "dc.description": s.description,
-    "dc.language": "de",
-    "dc.subject": `Gehaltsrechner, Lohnrechner, Steuer ${YEAR}, Deutschland`,
-    "revisit-after": "3 days",
-    "geo.region": "DE",
-    "geo.placename": "Deutschland",
+    "dc.language":    "de",
+    "dc.rights":      `Copyright ${YEAR} ${SITE_NAME}`,
+    "dc.subject":     `Gehaltsrechner, Lohnrechner, Steuer ${YEAR}, Deutschland`,
+    "revisit-after":  "3 days",
+    "geo.region":     "DE",
+    "geo.placename":  "Deutschland",
+    "rating":         "general",
+    "language":       "German",
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+
+  /* ── Structured Data: WebSite (enables Sitelinks Searchbox) ── */
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": SITE_NAME,
     "url": SITE_URL,
-    "description": `Kostenlose Gehalts- und Lohnrechner für Deutschland ${YEAR}/${NEXT_YEAR}`,
+    "description": `Kostenlose Gehalts- und Lohnrechner für Deutschland ${YEAR}/${NEXT_YEAR}. Brutto-Netto, Stundenlohn, Rente, Firmenwagen & mehr.`,
     "inLanguage": "de-DE",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": `${SITE_URL}/?q={search_term_string}`,
+      "target": { "@type": "EntryPoint", "urlTemplate": `${SITE_URL}/?s={search_term_string}` },
       "query-input": "required name=search_term_string",
     },
   };
 
+  /* ── Structured Data: Organization (trust signal) ── */
   const orgSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": SITE_NAME,
     "url": SITE_URL,
-    "logo": `${SITE_URL}/logo.png`,
-    "sameAs": [],
-    "areaServed": {
-      "@type": "Country",
-      "name": "Germany"
-    }
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${SITE_URL}/logo.png`,
+      "width": 512,
+      "height": 512,
+    },
+    "description": `Kostenlose Brutto-Netto-Rechner & Finanztools für Deutschland – präzise, aktuell, ohne Anmeldung.`,
+    "foundingDate": "2024",
+    "areaServed": { "@type": "Country", "name": "Germany" },
+    "inLanguage": "de-DE",
+    "sameAs": [
+      "https://tdee.tech",
+    ],
+  };
+
+  /* ── Structured Data: CollectionPage (Hub) ── */
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": `Kostenlose Finanz- & Gehaltsrechner ${YEAR}`,
+    "url": SITE_URL,
+    "description": `Alle kostenlosen Finanz-Rechner für Deutschland ${YEAR}: Brutto-Netto, Stundenlohn, Firmenwagen, Rente & mehr.`,
+    "inLanguage": "de-DE",
+    "hasPart": [
+      { "@type": "WebApplication", "name": "Brutto-Netto-Rechner",  "url": `${SITE_URL}/brutto-netto-rechner` },
+      { "@type": "WebApplication", "name": "Netto-Brutto-Rechner",  "url": `${SITE_URL}/netto-brutto` },
+      { "@type": "WebApplication", "name": "Stundenlohnrechner",    "url": `${SITE_URL}/stundenlohn` },
+      { "@type": "WebApplication", "name": "Firmenwagenrechner",    "url": `${SITE_URL}/firmenwagen` },
+      { "@type": "WebApplication", "name": "Kurzarbeitergeld",      "url": `${SITE_URL}/kurzarbeitergeld` },
+      { "@type": "WebApplication", "name": "Arbeitslosengeld I",    "url": `${SITE_URL}/arbeitslosengeld` },
+      { "@type": "WebApplication", "name": "Rentenrechner",         "url": `${SITE_URL}/rente` },
+      { "@type": "WebApplication", "name": "Pendlerpauschale",      "url": `${SITE_URL}/pendlerpauschale` },
+    ],
   };
 
   return (
@@ -106,6 +146,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />
         {/* Google Analytics */}
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-FY0K5KT32H" strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">

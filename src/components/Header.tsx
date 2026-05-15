@@ -146,7 +146,7 @@ function SearchModal({ onClose }: { onClose: () => void }) {
             ref={inputRef}
             className="search-input"
             type="text"
-            placeholder="Rechner suchen … z.B. „Brutto" oder „Rente""
+            placeholder="Rechner suchen ... z.B. Brutto oder Rente"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             autoComplete="off"
