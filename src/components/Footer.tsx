@@ -6,7 +6,7 @@ const FOOTER_COLS = [
   {
     title: "Lohnrechner",
     links: [
-      { href: "/", label: "Brutto-Netto-Rechner" },
+      { href: "/brutto-netto-rechner", label: "Brutto-Netto-Rechner" },
       { href: "/netto-brutto", label: "Netto-Brutto-Rechner" },
       { href: "/stundenlohn", label: "Stundenlohnrechner" },
       { href: "/arbeitgeber", label: "Arbeitgeberrechner" },

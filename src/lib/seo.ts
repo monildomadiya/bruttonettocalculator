@@ -34,11 +34,17 @@ export const CALCULATOR_SEO: Record<string, {
   keywords: string[];
   path: string;
 }> = {
+  hub: {
+    title: `Brutto-Netto-Rechner & Finanzrechner Hub ${YEAR}`,
+    description: `Kostenlose Finanz- & Gehaltsrechner. Berechnen Sie Ihr Nettogehalt, Steuern und Sozialabgaben präzise und ohne Anmeldung. Offizielle Formeln ${YEAR}.`,
+    keywords: ["Finanzrechner", "Gehaltsrechner", "Alle Rechner", "Brutto Netto Hub", "Steuerrechner"],
+    path: "/",
+  },
   home: {
     title: `Brutto-Netto-Rechner ${YEAR}/${NEXT_YEAR} | Nettogehalt sofort berechnen – kostenlos`,
     description: `✓ Brutto-Netto-Rechner ${YEAR}: Nettogehalt sekundenschnell berechnen. Lohnsteuer, alle 6 Steuerklassen, Sozialabgaben ${YEAR}/${NEXT_YEAR}. Keine Anmeldung nötig.`,
     keywords: ["Brutto Netto Rechner", "Nettogehalt berechnen", "Gehaltsrechner", `Lohnsteuer ${YEAR}`, "Steuerklassen", "Sozialabgaben"],
-    path: "/",
+    path: "/brutto-netto-rechner",
   },
   "netto-brutto": {
     title: `Netto-Brutto-Rechner ${YEAR} | Wunsch-Netto zu Brutto umrechnen`,

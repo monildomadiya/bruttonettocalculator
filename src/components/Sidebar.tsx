@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 
 const TOOLS = [
-  { href: "/", label: "Brutto-Netto-Rechner", desc: "Nettogehalt berechnen" },
+  { href: "/brutto-netto-rechner", label: "Brutto-Netto-Rechner", desc: "Nettogehalt berechnen" },
   { href: "/netto-brutto", label: "Netto-Brutto-Rechner", desc: "Bruttogehalt aus Netto" },
   { href: "/stundenlohn", label: "Stundenlohnrechner", desc: "Gehalt auf Stundenbasis" },
   { href: "/firmenwagen", label: "Firmenwagenrechner", desc: "Geldwerter Vorteil" },

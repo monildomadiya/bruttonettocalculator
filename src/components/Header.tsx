@@ -8,7 +8,7 @@ const NAV_GROUPS = [
   {
     label: "Lohnrechner",
     items: [
-      { href: "/", label: "Brutto-Netto-Rechner", desc: "Nettogehalt berechnen" },
+      { href: "/brutto-netto-rechner", label: "Brutto-Netto-Rechner", desc: "Nettogehalt berechnen" },
       { href: "/netto-brutto", label: "Netto-Brutto-Rechner", desc: "Brutto aus Wunsch-Netto" },
       { href: "/stundenlohn", label: "Stundenlohnrechner", desc: "Gehalt auf Stundenbasis" },
       { href: "/arbeitgeber", label: "Arbeitgeberrechner", desc: "Gesamte Lohnkosten" },

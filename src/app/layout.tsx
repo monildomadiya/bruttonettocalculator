@@ -14,7 +14,7 @@ const nunito = Nunito_Sans({
   variable: "--font-nunito",
 });
 
-const s = CALCULATOR_SEO.home;
+const s = CALCULATOR_SEO.hub;
 
 export const metadata: Metadata = {
   title: {

@@ -7,6 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const routes = [
     { url: '/', priority: 1.0, changeFrequency: 'weekly' as const },
+    { url: '/brutto-netto-rechner', priority: 1.0, changeFrequency: 'weekly' as const },
     { url: '/netto-brutto', priority: 0.95, changeFrequency: 'weekly' as const },
     { url: '/stundenlohn', priority: 0.90, changeFrequency: 'weekly' as const },
     { url: '/firmenwagen', priority: 0.90, changeFrequency: 'weekly' as const },
