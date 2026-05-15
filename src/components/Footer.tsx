@@ -58,33 +58,26 @@ export default function Footer() {
 
           {/* Brand column */}
           <div className="footer-brand">
-            <Link href="/" className="footer-logo" style={{ textDecoration: "none" }}>
-              <div className="footer-logo-icon">€</div>
-              <span className="footer-logo-text">bruttonettocalculator</span>
+            <Link href="/" className="logo" style={{ marginBottom: "12px" }}>
+              <span className="logo-icon-bg"><span className="logo-icon-text">&#8364;</span></span>
+              <span className="logo-name">bruttonettocalculator</span>
             </Link>
-            <p className="footer-tagline">
+            <p>
               Präzise Gehalts- und Steuerrechner für Deutschland. Kostenlos, ohne Anmeldung, immer aktuell.
             </p>
-            <div className="footer-badges">
-              <span className="footer-badge">🇩🇪 Deutschland</span>
-              <span className="footer-badge">✓ Kostenlos</span>
-              <span className="footer-badge">🔒 Datenschutz</span>
-            </div>
           </div>
 
           {/* Link columns */}
           {FOOTER_COLS.map((col) => (
             <div key={col.title} className="footer-col">
               <div className="footer-col-title">{col.title}</div>
-              <ul className="footer-link-list">
+              <div className="footer-links">
                 {col.links.map((link) => (
-                  <li key={link.href}>
-                    <Link href={link.href} className="footer-link">
-                      {link.label}
-                    </Link>
-                  </li>
+                  <Link key={link.href} href={link.href} className="footer-link">
+                    {link.label}
+                  </Link>
                 ))}
-              </ul>
+              </div>
             </div>
           ))}
         </div>
@@ -95,7 +88,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="footer-bottom">
           <div className="footer-bottom-left">
-            <span>© {YEAR} bruttonettocalculator. Alle Rechte vorbehalten.</span>
+            <span className="footer-copy">© {YEAR} bruttonettocalculator. Alle Rechte vorbehalten.</span>
             <span className="footer-disclaimer">
               Alle Angaben ohne Gewähr. Keine Steuerberatung. Stand: {YEAR}.
             </span>

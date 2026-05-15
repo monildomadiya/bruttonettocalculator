@@ -149,11 +149,11 @@ function SearchModal({ onClose }: { onClose: () => void }) {
       <div className="search-modal" onClick={(e) => e.stopPropagation()}>
 
         {/* Input */}
-        <div className="search-input-row">
-          <span className="search-input-icon"><SearchIcon size={16} /></span>
+        <div className="search-modal-header">
+          <SearchIcon size={16} />
           <input
             ref={inputRef}
-            className="search-input"
+            className="search-modal-input"
             type="text"
             placeholder="Rechner suchen ... z.B. Brutto oder Rente"
             value={query}
@@ -161,8 +161,8 @@ function SearchModal({ onClose }: { onClose: () => void }) {
             autoComplete="off"
             spellCheck={false}
           />
-          <button className="search-close-btn" onClick={onClose} aria-label="Schliessen">
-            <span className="search-esc-badge">ESC</span>
+          <button className="search-modal-close" onClick={onClose} aria-label="Schliessen">
+            <CloseIcon size={18} />
           </button>
         </div>
 
@@ -170,42 +170,30 @@ function SearchModal({ onClose }: { onClose: () => void }) {
         <div className="search-results">
           {results.length === 0 ? (
             <div className="search-empty">
-              <SearchIcon size={28} />
-              <p>Kein Ergebnis fuer &ldquo;{query}&rdquo;</p>
+              <p>Kein Ergebnis für &ldquo;{query}&rdquo;</p>
             </div>
           ) : (
-            <>
-              <div className="search-section-label">
-                {query.trim() ? `${results.length} Ergebnis${results.length !== 1 ? "se" : ""}` : "Alle Rechner"}
-              </div>
-              <ul className="search-list" role="listbox" ref={listRef}>
-                {results.map((item, i) => (
-                  <li key={item.href} role="option" aria-selected={i === activeIdx}>
-                    <button
-                      data-idx={i}
-                      className={`search-result-item${i === activeIdx ? " active" : ""}`}
-                      onClick={() => navigate(item.href)}
-                      onMouseEnter={() => setActiveIdx(i)}
-                    >
-                      <div className="search-result-left">
-                        <span className="search-result-tag">{item.group}</span>
-                        <span className="search-result-label">{item.label}</span>
-                        <span className="search-result-desc">{item.desc}</span>
-                      </div>
-                      <span className="search-result-arrow"><ArrowRightIcon /></span>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </>
+            <ul style={{ listStyle: "none", margin: 0, padding: 0 }} role="listbox" ref={listRef}>
+              {results.map((item, i) => (
+                <li key={item.href} role="option" aria-selected={i === activeIdx}>
+                  <button
+                    data-idx={i}
+                    className="search-result-item"
+                    style={{ width: "100%", textAlign: "left", background: i === activeIdx ? "var(--bg-tag)" : "transparent", border: "none", display: "flex", alignItems: "center", justifyContent: "space-between", cursor: "pointer" }}
+                    onClick={() => navigate(item.href)}
+                    onMouseEnter={() => setActiveIdx(i)}
+                  >
+                    <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                      <span style={{ fontSize: "10px", fontWeight: 700, color: "var(--accent)", textTransform: "uppercase", letterSpacing: "0.05em" }}>{item.group}</span>
+                      <span className="search-result-name">{item.label}</span>
+                      <span className="search-result-desc">{item.desc}</span>
+                    </div>
+                    <ArrowRightIcon />
+                  </button>
+                </li>
+              ))}
+            </ul>
           )}
-        </div>
-
-        {/* Keyboard hints */}
-        <div className="search-footer">
-          <span className="search-hint"><kbd>↑</kbd><kbd>↓</kbd> Navigieren</span>
-          <span className="search-hint"><kbd>↵</kbd> Oeffnen</span>
-          <span className="search-hint"><kbd>ESC</kbd> Schliessen</span>
         </div>
       </div>
     </div>
