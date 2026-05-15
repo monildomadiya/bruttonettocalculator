@@ -54,6 +54,19 @@ export default function Sidebar() {
           sofort mehr Nettogehalt erhalten.
         </p>
       </div>
+
+      {/* Partner Card */}
+      <div className="sidebar-card" style={{ padding: "16px", background: "var(--surface-sunken)", border: "1px solid var(--border-color)", marginTop: "16px" }}>
+        <div style={{ fontSize: 12, fontWeight: 700, color: "var(--text-muted)", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em" }}>
+          🤝 Partnerprojekt
+        </div>
+        <p style={{ fontSize: 12.5, color: "var(--text-body)", lineHeight: 1.6, marginBottom: 8 }}>
+          Berechne deinen exakten Kalorienbedarf (TDEE) für Muskelaufbau oder Gewichtsverlust.
+        </p>
+        <a href="https://tdee.tech" target="_blank" rel="noopener noreferrer" style={{ display: "inline-block", fontSize: 12.5, fontWeight: 600, color: "var(--accent)", textDecoration: "none" }}>
+          → tdee.tech besuchen
+        </a>
+      </div>
     </aside>
   );
 }

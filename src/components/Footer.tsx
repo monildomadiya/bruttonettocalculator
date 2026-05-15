@@ -43,6 +43,7 @@ const FOOTER_COLS = [
       { href: "/nutzungsbedingungen", label: "Nutzungsbedingungen" },
       { href: "/datenschutz", label: "Datenschutz" },
       { href: "/impressum", label: "Impressum" },
+      { href: "https://tdee.tech", label: "Partner: TDEE.TECH" },
     ],
   },
 ];
