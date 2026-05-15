@@ -193,6 +193,9 @@ html, body {
 
 .nav-group {
   position: relative;
+  /* Extend hover area to cover the gap between button and dropdown */
+  padding-bottom: 8px;
+  margin-bottom: -8px;
 }
 
 .nav-link {
@@ -212,11 +215,12 @@ html, body {
   border-radius: 4px;
 }
 
-.nav-link:hover,
-.nav-link-active {
+/* When nav-group is hovered, colour the button */
+.nav-group:hover .nav-link {
   color: var(--accent);
 }
 
+/* Chevron — rotates when parent group is hovered */
 .nav-chevron {
   display: inline-flex;
   align-items: center;
@@ -224,23 +228,37 @@ html, body {
   transition: transform 0.18s ease;
 }
 
+/* CSS-driven rotation — works without any JS state */
+.nav-group:hover .nav-chevron {
+  transform: rotate(180deg);
+  color: var(--accent);
+}
+
+/* Mobile accordion (still uses JS class .open) */
 .nav-chevron.open {
   transform: rotate(180deg);
 }
 
-/* ── Dropdown ── */
+/* ── Dropdown — pure CSS :hover, no gap bug ── */
 .nav-dropdown {
+  /* Hidden by default */
+  display: none;
   position: absolute;
-  top: calc(100% + 6px);
+  top: 100%;           /* flush with bottom of nav-group — no gap */
   left: 50%;
   transform: translateX(-50%);
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
   padding: 6px 0 8px;
   min-width: 260px;
   z-index: 300;
   border-radius: 2px;
+}
+
+/* Show on parent hover — CSS only, no JS needed */
+.nav-group:hover .nav-dropdown {
+  display: block;
   animation: dropIn 0.15s ease;
 }
 

@@ -37,19 +37,18 @@ const NAV_GROUPS = [
   {
     label: "Rente & Vorsorge",
     items: [
-      { href: "/rente",        label: "Rentenrechner",        desc: "Gesetzliche Rente schätzen", tag: "rente altersrente" },
-      { href: "/rentenpunkte", label: "Rentenpunkte Rechner", desc: "Entgeltpunkte ermitteln",    tag: "rentenpunkte entgelt" },
+      { href: "/rente",        label: "Rentenrechner",        desc: "Gesetzliche Rente schaetzen", tag: "rente altersrente" },
+      { href: "/rentenpunkte", label: "Rentenpunkte Rechner", desc: "Entgeltpunkte ermitteln",     tag: "rentenpunkte entgelt" },
     ],
   },
 ];
 
-// Flat list for search
 const ALL_ITEMS = NAV_GROUPS.flatMap((g) =>
   g.items.map((item) => ({ ...item, group: g.label }))
 );
 
 /* ═══════════════════════════════════════
-   SVG ICONS
+   ICONS
 ═══════════════════════════════════════ */
 const ChevronDown = () => (
   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -58,10 +57,14 @@ const ChevronDown = () => (
 );
 const SunIcon = () => (
   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="5" /><line x1="12" y1="1" x2="12" y2="3" />
-    <line x1="12" y1="21" x2="12" y2="23" /><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" /><line x1="1" y1="12" x2="3" y2="12" />
-    <line x1="21" y1="12" x2="23" y2="12" /><line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+    <circle cx="12" cy="12" r="5" />
+    <line x1="12" y1="1" x2="12" y2="3" />
+    <line x1="12" y1="21" x2="12" y2="23" />
+    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+    <line x1="1" y1="12" x2="3" y2="12" />
+    <line x1="21" y1="12" x2="23" y2="12" />
+    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
     <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
   </svg>
 );
@@ -72,17 +75,21 @@ const MoonIcon = () => (
 );
 const SearchIcon = ({ size = 14 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+    <circle cx="11" cy="11" r="8" />
+    <line x1="21" y1="21" x2="16.65" y2="16.65" />
   </svg>
 );
 const HamburgerIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" />
+    <line x1="3" y1="6" x2="21" y2="6" />
+    <line x1="3" y1="12" x2="21" y2="12" />
+    <line x1="3" y1="18" x2="21" y2="18" />
   </svg>
 );
 const CloseIcon = ({ size = 16 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+    <line x1="18" y1="6" x2="6" y2="18" />
+    <line x1="6" y1="6" x2="18" y2="18" />
   </svg>
 );
 const ArrowRightIcon = () => (
@@ -95,51 +102,72 @@ const ArrowRightIcon = () => (
    SEARCH MODAL
 ═══════════════════════════════════════ */
 function SearchModal({ onClose }: { onClose: () => void }) {
-  const [query, setQuery] = useState("");
+  const [query, setQuery]       = useState("");
   const [activeIdx, setActiveIdx] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
-  const router = useRouter();
+  const listRef  = useRef<HTMLUListElement>(null);
+  const router   = useRouter();
 
   const results = query.trim()
     ? ALL_ITEMS.filter((item) => {
         const q = query.toLowerCase();
         return (
           item.label.toLowerCase().includes(q) ||
-          item.desc.toLowerCase().includes(q) ||
-          item.tag.toLowerCase().includes(q) ||
+          item.desc.toLowerCase().includes(q)  ||
+          item.tag.toLowerCase().includes(q)   ||
           item.group.toLowerCase().includes(q)
         );
       })
     : ALL_ITEMS;
 
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
+  // Auto-focus input on mount
+  useEffect(() => { inputRef.current?.focus(); }, []);
 
+  // Reset active index when query changes
+  useEffect(() => { setActiveIdx(0); }, [query]);
+
+  // Scroll active item into view
   useEffect(() => {
-    setActiveIdx(0);
-  }, [query]);
+    const el = listRef.current?.querySelector(`[data-idx="${activeIdx}"]`) as HTMLElement | null;
+    el?.scrollIntoView({ block: "nearest" });
+  }, [activeIdx]);
 
   const navigate = useCallback((href: string) => {
     router.push(href);
     onClose();
   }, [router, onClose]);
 
+  // Keyboard: Escape / ArrowUp / ArrowDown / Enter
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === "Escape") { onClose(); return; }
-      if (e.key === "ArrowDown") { e.preventDefault(); setActiveIdx((i) => Math.min(i + 1, results.length - 1)); }
-      if (e.key === "ArrowUp")   { e.preventDefault(); setActiveIdx((i) => Math.max(i - 1, 0)); }
-      if (e.key === "Enter" && results[activeIdx]) { navigate(results[activeIdx].href); }
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        setActiveIdx((i) => Math.min(i + 1, results.length - 1));
+      }
+      if (e.key === "ArrowUp") {
+        e.preventDefault();
+        setActiveIdx((i) => Math.max(i - 1, 0));
+      }
+      if (e.key === "Enter" && results[activeIdx]) {
+        navigate(results[activeIdx].href);
+      }
     };
     document.addEventListener("keydown", handler);
     return () => document.removeEventListener("keydown", handler);
   }, [results, activeIdx, navigate, onClose]);
 
   return (
-    <div className="search-overlay" role="dialog" aria-modal="true" aria-label="Rechner suchen" onClick={onClose}>
+    <div
+      className="search-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Rechner suchen"
+      onClick={onClose}
+    >
       <div className="search-modal" onClick={(e) => e.stopPropagation()}>
-        {/* Input row */}
+
+        {/* ── Input row ── */}
         <div className="search-input-row">
           <span className="search-input-icon"><SearchIcon size={16} /></span>
           <input
@@ -152,30 +180,30 @@ function SearchModal({ onClose }: { onClose: () => void }) {
             autoComplete="off"
             spellCheck={false}
           />
-          <button className="search-close-btn" onClick={onClose} aria-label="Schließen">
+          <button className="search-close-btn" onClick={onClose} aria-label="Schliessen">
             <span className="search-esc-badge">ESC</span>
           </button>
         </div>
 
-        {/* Results */}
+        {/* ── Results ── */}
         <div className="search-results">
           {results.length === 0 ? (
             <div className="search-empty">
               <SearchIcon size={28} />
-              <p>Kein Rechner für „{query}" gefunden</p>
+              <p>Kein Rechner fuer &ldquo;{query}&rdquo; gefunden</p>
             </div>
           ) : (
             <>
-              {!query && (
-                <div className="search-section-label">Alle Rechner</div>
-              )}
-              {query && results.length > 0 && (
-                <div className="search-section-label">{results.length} Ergebnis{results.length !== 1 ? "se" : ""}</div>
-              )}
-              <ul className="search-list" role="listbox">
+              <div className="search-section-label">
+                {query.trim()
+                  ? `${results.length} Ergebnis${results.length !== 1 ? "se" : ""}`
+                  : "Alle Rechner"}
+              </div>
+              <ul className="search-list" role="listbox" ref={listRef}>
                 {results.map((item, i) => (
                   <li key={item.href} role="option" aria-selected={i === activeIdx}>
                     <button
+                      data-idx={i}
                       className={`search-result-item${i === activeIdx ? " active" : ""}`}
                       onClick={() => navigate(item.href)}
                       onMouseEnter={() => setActiveIdx(i)}
@@ -194,35 +222,13 @@ function SearchModal({ onClose }: { onClose: () => void }) {
           )}
         </div>
 
-        {/* Footer hints */}
+        {/* ── Keyboard hints ── */}
         <div className="search-footer">
           <span className="search-hint"><kbd>↑</kbd><kbd>↓</kbd> Navigieren</span>
-          <span className="search-hint"><kbd>↵</kbd> Öffnen</span>
-          <span className="search-hint"><kbd>ESC</kbd> Schließen</span>
+          <span className="search-hint"><kbd>↵</kbd> Oeffnen</span>
+          <span className="search-hint"><kbd>ESC</kbd> Schliessen</span>
         </div>
       </div>
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════
-   DROPDOWN MENU
-═══════════════════════════════════════ */
-function DropdownMenu({ group, isOpen, onClose }: {
-  group: typeof NAV_GROUPS[0];
-  isOpen: boolean;
-  onClose: () => void;
-}) {
-  if (!isOpen) return null;
-  return (
-    <div className="nav-dropdown" role="menu">
-      <div className="nav-dropdown-title">{group.label}</div>
-      {group.items.map((item) => (
-        <Link key={item.href} href={item.href} className="nav-dropdown-item" onClick={onClose} role="menuitem">
-          <span className="nav-dropdown-label">{item.label}</span>
-          <span className="nav-dropdown-desc">{item.desc}</span>
-        </Link>
-      ))}
     </div>
   );
 }
@@ -231,36 +237,26 @@ function DropdownMenu({ group, isOpen, onClose }: {
    HEADER
 ═══════════════════════════════════════ */
 export default function Header() {
-  const { theme, toggle } = useTheme();
-  const isDark = theme === "dark";
-  const [openGroup, setOpenGroup]         = useState<string | null>(null);
-  const [mobileOpen, setMobileOpen]       = useState(false);
+  const { theme, toggle }             = useTheme();
+  const isDark                        = theme === "dark";
+  const [mobileOpen, setMobileOpen]   = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
-  const [searchOpen, setSearchOpen]       = useState(false);
-  const headerRef = useRef<HTMLElement>(null);
+  const [searchOpen, setSearchOpen]   = useState(false);
 
-  /* Close dropdown on outside click */
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
-        setOpenGroup(null);
-      }
-    };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, []);
-
-  /* Lock body scroll when mobile drawer open */
+  // Lock body scroll when mobile drawer is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
-  /* "/" keyboard shortcut opens search */
+  // "/" shortcut opens search
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if (e.key === "/" && !searchOpen &&
-          !(e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement)) {
+      if (
+        e.key === "/" &&
+        !searchOpen &&
+        !(e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement)
+      ) {
         e.preventDefault();
         setSearchOpen(true);
       }
@@ -270,17 +266,15 @@ export default function Header() {
   }, [searchOpen]);
 
   const closeAll = () => {
-    setOpenGroup(null);
     setMobileOpen(false);
     setMobileExpanded(null);
   };
 
   return (
     <>
-      {/* ── Search Modal ── */}
       {searchOpen && <SearchModal onClose={() => setSearchOpen(false)} />}
 
-      <header className="site-header" ref={headerRef}>
+      <header className="site-header">
         <div className="page-wrap header-inner-wrap">
           <div className="site-header-inner">
 
@@ -288,53 +282,56 @@ export default function Header() {
             <Link href="/" className="logo" onClick={closeAll} aria-label="Startseite">
               <div className="logo-icon" aria-hidden="true">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                  <text x="1" y="19" fontSize="21" fontWeight="900" fontFamily="Arial, sans-serif">€</text>
+                  <text x="1" y="19" fontSize="21" fontWeight="900" fontFamily="Arial, sans-serif">&#8364;</text>
                 </svg>
               </div>
               <span className="logo-text">bruttonettocalculator</span>
             </Link>
 
-            {/* ── Desktop Nav ── */}
+            {/* ── Desktop Nav — CSS :hover dropdowns (no gap bug) ── */}
             <nav className="header-nav" aria-label="Hauptnavigation">
               {NAV_GROUPS.map((group) => (
-                <div
-                  key={group.label}
-                  className="nav-group"
-                  onMouseEnter={() => setOpenGroup(group.label)}
-                  onMouseLeave={() => setOpenGroup(null)}
-                >
-                  <button
-                    className={`nav-link${openGroup === group.label ? " nav-link-active" : ""}`}
-                    aria-expanded={openGroup === group.label}
-                    aria-haspopup="true"
-                  >
+                <div key={group.label} className="nav-group">
+                  {/* button is purely visual; CSS :hover on .nav-group drives the dropdown */}
+                  <button className="nav-link" aria-haspopup="true">
                     {group.label}
-                    <span className={`nav-chevron${openGroup === group.label ? " open" : ""}`}>
+                    <span className="nav-chevron">
                       <ChevronDown />
                     </span>
                   </button>
-                  <DropdownMenu
-                    group={group}
-                    isOpen={openGroup === group.label}
-                    onClose={() => setOpenGroup(null)}
-                  />
+
+                  {/* Dropdown — shown via CSS .nav-group:hover .nav-dropdown */}
+                  <div className="nav-dropdown" role="menu">
+                    <div className="nav-dropdown-title">{group.label}</div>
+                    {group.items.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className="nav-dropdown-item"
+                        role="menuitem"
+                        onClick={closeAll}
+                      >
+                        <span className="nav-dropdown-label">{item.label}</span>
+                        <span className="nav-dropdown-desc">{item.desc}</span>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               ))}
             </nav>
 
-            {/* ── Right Actions ── */}
+            {/* ── Right actions ── */}
             <div className="header-actions">
-
-              {/* Search button — opens spotlight modal */}
+              {/* Search pill */}
               <button
                 id="header-search-btn"
                 className="header-search-pill"
                 onClick={() => setSearchOpen(true)}
                 aria-label="Rechner suchen"
-                title="Rechner suchen (drücke /)"
+                title="Rechner suchen (druecke /)"
               >
                 <SearchIcon size={13} />
-                <span className="search-pill-text">Suchen…</span>
+                <span className="search-pill-text">Suchen...</span>
                 <kbd className="search-pill-kbd">/</kbd>
               </button>
 
@@ -348,11 +345,11 @@ export default function Header() {
                 {isDark ? <SunIcon /> : <MoonIcon />}
               </button>
 
-              {/* Mobile hamburger */}
+              {/* Hamburger */}
               <button
                 className="h-icon-btn mobile-menu-btn"
                 onClick={() => setMobileOpen(!mobileOpen)}
-                aria-label="Menü öffnen"
+                aria-label="Menue oeffnen"
                 aria-expanded={mobileOpen}
               >
                 {mobileOpen ? <CloseIcon /> : <HamburgerIcon />}
@@ -364,14 +361,14 @@ export default function Header() {
         {/* ── Mobile Drawer ── */}
         {mobileOpen && (
           <div className="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation">
-            {/* Mobile search */}
+            {/* Mobile search trigger */}
             <div className="mobile-search-row">
               <button
                 className="mobile-search-trigger"
                 onClick={() => { setMobileOpen(false); setSearchOpen(true); }}
               >
                 <SearchIcon size={14} />
-                <span>Rechner suchen…</span>
+                <span>Rechner suchen...</span>
               </button>
             </div>
 
@@ -380,7 +377,9 @@ export default function Header() {
                 <div key={group.label} className="mobile-group">
                   <button
                     className="mobile-group-title"
-                    onClick={() => setMobileExpanded(mobileExpanded === group.label ? null : group.label)}
+                    onClick={() =>
+                      setMobileExpanded(mobileExpanded === group.label ? null : group.label)
+                    }
                     aria-expanded={mobileExpanded === group.label}
                   >
                     {group.label}
@@ -388,6 +387,7 @@ export default function Header() {
                       <ChevronDown />
                     </span>
                   </button>
+
                   {mobileExpanded === group.label && (
                     <div className="mobile-group-items">
                       {group.items.map((item) => (
