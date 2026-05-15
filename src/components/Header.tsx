@@ -12,26 +12,26 @@ const NAV_GROUPS = [
   {
     label: "Lohnrechner",
     items: [
-      { href: "/brutto-netto-rechner", label: "Brutto-Netto-Rechner",  desc: "Nettogehalt berechnen",      tag: "brutto netto gehalt lohn" },
-      { href: "/netto-brutto",         label: "Netto-Brutto-Rechner",  desc: "Brutto aus Wunsch-Netto",   tag: "netto brutto wunsch" },
-      { href: "/stundenlohn",          label: "Stundenlohnrechner",    desc: "Gehalt auf Stundenbasis",    tag: "stunde stundenlohn" },
-      { href: "/arbeitgeber",          label: "Arbeitgeberrechner",    desc: "Gesamte Lohnkosten",         tag: "arbeitgeber kosten" },
+      { href: "/brutto-netto-rechner", label: "Brutto-Netto-Rechner",  desc: "Nettogehalt berechnen",     tag: "brutto netto gehalt lohn" },
+      { href: "/netto-brutto",         label: "Netto-Brutto-Rechner",  desc: "Brutto aus Wunsch-Netto",  tag: "netto brutto wunsch" },
+      { href: "/stundenlohn",          label: "Stundenlohnrechner",    desc: "Gehalt auf Stundenbasis",   tag: "stunde stundenlohn" },
+      { href: "/arbeitgeber",          label: "Arbeitgeberrechner",    desc: "Gesamte Lohnkosten",        tag: "arbeitgeber kosten" },
     ],
   },
   {
     label: "Steuer & Recht",
     items: [
-      { href: "/firmenwagen",      label: "Firmenwagenrechner", desc: "Geldwerter Vorteil (1%)",  tag: "firmenwagen auto steuer" },
-      { href: "/pendlerpauschale", label: "Pendlerpauschale",   desc: "Fahrtkosten absetzen",     tag: "pendler fahrtkosten steuer" },
-      { href: "/schenkungssteuer", label: "Schenkungssteuer",   desc: "Steuern bei Schenkungen",  tag: "schenkung erbschaft steuer" },
+      { href: "/firmenwagen",      label: "Firmenwagenrechner", desc: "Geldwerter Vorteil (1%)", tag: "firmenwagen auto steuer" },
+      { href: "/pendlerpauschale", label: "Pendlerpauschale",   desc: "Fahrtkosten absetzen",    tag: "pendler fahrtkosten steuer" },
+      { href: "/schenkungssteuer", label: "Schenkungssteuer",   desc: "Steuern bei Schenkungen", tag: "schenkung erbschaft steuer" },
     ],
   },
   {
     label: "Sozialleistungen",
     items: [
-      { href: "/kurzarbeitergeld", label: "Kurzarbeitergeld",   desc: "KUG Anspruch berechnen",  tag: "kurzarbeit kug" },
-      { href: "/arbeitslosengeld", label: "Arbeitslosengeld I", desc: "ALG I Anspruch",           tag: "arbeitslos alg" },
-      { href: "/urlaubsgeld",      label: "Urlaubsgeldrechner", desc: "Netto-Urlaubsgeld",        tag: "urlaub urlaubsgeld" },
+      { href: "/kurzarbeitergeld", label: "Kurzarbeitergeld",   desc: "KUG Anspruch berechnen", tag: "kurzarbeit kug" },
+      { href: "/arbeitslosengeld", label: "Arbeitslosengeld I", desc: "ALG I Anspruch",          tag: "arbeitslos alg" },
+      { href: "/urlaubsgeld",      label: "Urlaubsgeldrechner", desc: "Netto-Urlaubsgeld",       tag: "urlaub urlaubsgeld" },
     ],
   },
   {
@@ -48,7 +48,7 @@ const ALL_ITEMS = NAV_GROUPS.flatMap((g) =>
 );
 
 /* ═══════════════════════════════════════
-   ICONS
+   ICONS  (pure SVG paths — no <text> tag, fully SSR-safe)
 ═══════════════════════════════════════ */
 const ChevronDown = () => (
   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -102,7 +102,7 @@ const ArrowRightIcon = () => (
    SEARCH MODAL
 ═══════════════════════════════════════ */
 function SearchModal({ onClose }: { onClose: () => void }) {
-  const [query, setQuery]       = useState("");
+  const [query, setQuery]         = useState("");
   const [activeIdx, setActiveIdx] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef  = useRef<HTMLUListElement>(null);
@@ -120,13 +120,9 @@ function SearchModal({ onClose }: { onClose: () => void }) {
       })
     : ALL_ITEMS;
 
-  // Auto-focus input on mount
   useEffect(() => { inputRef.current?.focus(); }, []);
-
-  // Reset active index when query changes
   useEffect(() => { setActiveIdx(0); }, [query]);
 
-  // Scroll active item into view
   useEffect(() => {
     const el = listRef.current?.querySelector(`[data-idx="${activeIdx}"]`) as HTMLElement | null;
     el?.scrollIntoView({ block: "nearest" });
@@ -137,37 +133,22 @@ function SearchModal({ onClose }: { onClose: () => void }) {
     onClose();
   }, [router, onClose]);
 
-  // Keyboard: Escape / ArrowUp / ArrowDown / Enter
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") { onClose(); return; }
-      if (e.key === "ArrowDown") {
-        e.preventDefault();
-        setActiveIdx((i) => Math.min(i + 1, results.length - 1));
-      }
-      if (e.key === "ArrowUp") {
-        e.preventDefault();
-        setActiveIdx((i) => Math.max(i - 1, 0));
-      }
-      if (e.key === "Enter" && results[activeIdx]) {
-        navigate(results[activeIdx].href);
-      }
+      if (e.key === "Escape")    { onClose(); return; }
+      if (e.key === "ArrowDown") { e.preventDefault(); setActiveIdx((i) => Math.min(i + 1, results.length - 1)); }
+      if (e.key === "ArrowUp")   { e.preventDefault(); setActiveIdx((i) => Math.max(i - 1, 0)); }
+      if (e.key === "Enter" && results[activeIdx]) { navigate(results[activeIdx].href); }
     };
     document.addEventListener("keydown", handler);
     return () => document.removeEventListener("keydown", handler);
   }, [results, activeIdx, navigate, onClose]);
 
   return (
-    <div
-      className="search-overlay"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Rechner suchen"
-      onClick={onClose}
-    >
+    <div className="search-overlay" role="dialog" aria-modal="true" onClick={onClose}>
       <div className="search-modal" onClick={(e) => e.stopPropagation()}>
 
-        {/* ── Input row ── */}
+        {/* Input */}
         <div className="search-input-row">
           <span className="search-input-icon"><SearchIcon size={16} /></span>
           <input
@@ -185,19 +166,17 @@ function SearchModal({ onClose }: { onClose: () => void }) {
           </button>
         </div>
 
-        {/* ── Results ── */}
+        {/* Results */}
         <div className="search-results">
           {results.length === 0 ? (
             <div className="search-empty">
               <SearchIcon size={28} />
-              <p>Kein Rechner fuer &ldquo;{query}&rdquo; gefunden</p>
+              <p>Kein Ergebnis fuer &ldquo;{query}&rdquo;</p>
             </div>
           ) : (
             <>
               <div className="search-section-label">
-                {query.trim()
-                  ? `${results.length} Ergebnis${results.length !== 1 ? "se" : ""}`
-                  : "Alle Rechner"}
+                {query.trim() ? `${results.length} Ergebnis${results.length !== 1 ? "se" : ""}` : "Alle Rechner"}
               </div>
               <ul className="search-list" role="listbox" ref={listRef}>
                 {results.map((item, i) => (
@@ -222,7 +201,7 @@ function SearchModal({ onClose }: { onClose: () => void }) {
           )}
         </div>
 
-        {/* ── Keyboard hints ── */}
+        {/* Keyboard hints */}
         <div className="search-footer">
           <span className="search-hint"><kbd>↑</kbd><kbd>↓</kbd> Navigieren</span>
           <span className="search-hint"><kbd>↵</kbd> Oeffnen</span>
@@ -237,24 +216,23 @@ function SearchModal({ onClose }: { onClose: () => void }) {
    HEADER
 ═══════════════════════════════════════ */
 export default function Header() {
-  const { theme, toggle }             = useTheme();
-  const isDark                        = theme === "dark";
-  const [mobileOpen, setMobileOpen]   = useState(false);
+  const { theme, toggle }                   = useTheme();
+  const isDark                              = theme === "dark";
+  const [mobileOpen, setMobileOpen]         = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
-  const [searchOpen, setSearchOpen]   = useState(false);
+  const [searchOpen, setSearchOpen]         = useState(false);
 
-  // Lock body scroll when mobile drawer is open
+  // Lock scroll when mobile open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
-  // "/" shortcut opens search
+  // "/" shortcut to open search
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (
-        e.key === "/" &&
-        !searchOpen &&
+        e.key === "/" && !searchOpen &&
         !(e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement)
       ) {
         e.preventDefault();
@@ -265,10 +243,7 @@ export default function Header() {
     return () => document.removeEventListener("keydown", handler);
   }, [searchOpen]);
 
-  const closeAll = () => {
-    setMobileOpen(false);
-    setMobileExpanded(null);
-  };
+  const closeAll = () => { setMobileOpen(false); setMobileExpanded(null); };
 
   return (
     <>
@@ -278,39 +253,24 @@ export default function Header() {
         <div className="page-wrap header-inner-wrap">
           <div className="site-header-inner">
 
-            {/* ── Logo ── */}
+            {/* ── Logo — plain span, no SVG text tag ── */}
             <Link href="/" className="logo" onClick={closeAll} aria-label="Startseite">
-              <div className="logo-icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                  <text x="1" y="19" fontSize="21" fontWeight="900" fontFamily="Arial, sans-serif">&#8364;</text>
-                </svg>
-              </div>
+              <span className="logo-icon-text" aria-hidden="true">&#8364;</span>
               <span className="logo-text">bruttonettocalculator</span>
             </Link>
 
-            {/* ── Desktop Nav — CSS :hover dropdowns (no gap bug) ── */}
+            {/* ── Desktop Nav — pure CSS :hover, zero JS state ── */}
             <nav className="header-nav" aria-label="Hauptnavigation">
               {NAV_GROUPS.map((group) => (
                 <div key={group.label} className="nav-group">
-                  {/* button is purely visual; CSS :hover on .nav-group drives the dropdown */}
-                  <button className="nav-link" aria-haspopup="true">
+                  <button className="nav-link">
                     {group.label}
-                    <span className="nav-chevron">
-                      <ChevronDown />
-                    </span>
+                    <span className="nav-chevron"><ChevronDown /></span>
                   </button>
-
-                  {/* Dropdown — shown via CSS .nav-group:hover .nav-dropdown */}
                   <div className="nav-dropdown" role="menu">
                     <div className="nav-dropdown-title">{group.label}</div>
                     {group.items.map((item) => (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        className="nav-dropdown-item"
-                        role="menuitem"
-                        onClick={closeAll}
-                      >
+                      <Link key={item.href} href={item.href} className="nav-dropdown-item" role="menuitem" onClick={closeAll}>
                         <span className="nav-dropdown-label">{item.label}</span>
                         <span className="nav-dropdown-desc">{item.desc}</span>
                       </Link>
@@ -322,36 +282,15 @@ export default function Header() {
 
             {/* ── Right actions ── */}
             <div className="header-actions">
-              {/* Search pill */}
-              <button
-                id="header-search-btn"
-                className="header-search-pill"
-                onClick={() => setSearchOpen(true)}
-                aria-label="Rechner suchen"
-                title="Rechner suchen (druecke /)"
-              >
+              <button className="header-search-pill" onClick={() => setSearchOpen(true)} aria-label="Suchen">
                 <SearchIcon size={13} />
                 <span className="search-pill-text">Suchen...</span>
                 <kbd className="search-pill-kbd">/</kbd>
               </button>
-
-              {/* Dark mode */}
-              <button
-                className="h-icon-btn"
-                onClick={toggle}
-                aria-label={isDark ? "Hellmodus" : "Dunkelmodus"}
-                title={isDark ? "Hellmodus" : "Dunkelmodus"}
-              >
+              <button className="h-icon-btn" onClick={toggle} aria-label={isDark ? "Hellmodus" : "Dunkelmodus"}>
                 {isDark ? <SunIcon /> : <MoonIcon />}
               </button>
-
-              {/* Hamburger */}
-              <button
-                className="h-icon-btn mobile-menu-btn"
-                onClick={() => setMobileOpen(!mobileOpen)}
-                aria-label="Menue oeffnen"
-                aria-expanded={mobileOpen}
-              >
+              <button className="h-icon-btn mobile-menu-btn" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Menu">
                 {mobileOpen ? <CloseIcon /> : <HamburgerIcon />}
               </button>
             </div>
@@ -360,43 +299,29 @@ export default function Header() {
 
         {/* ── Mobile Drawer ── */}
         {mobileOpen && (
-          <div className="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation">
-            {/* Mobile search trigger */}
+          <div className="mobile-menu" role="dialog" aria-modal="true">
             <div className="mobile-search-row">
-              <button
-                className="mobile-search-trigger"
-                onClick={() => { setMobileOpen(false); setSearchOpen(true); }}
-              >
+              <button className="mobile-search-trigger" onClick={() => { setMobileOpen(false); setSearchOpen(true); }}>
                 <SearchIcon size={14} />
                 <span>Rechner suchen...</span>
               </button>
             </div>
-
             <div className="mobile-menu-inner">
               {NAV_GROUPS.map((group) => (
                 <div key={group.label} className="mobile-group">
                   <button
                     className="mobile-group-title"
-                    onClick={() =>
-                      setMobileExpanded(mobileExpanded === group.label ? null : group.label)
-                    }
-                    aria-expanded={mobileExpanded === group.label}
+                    onClick={() => setMobileExpanded(mobileExpanded === group.label ? null : group.label)}
                   >
                     {group.label}
                     <span className={`nav-chevron${mobileExpanded === group.label ? " open" : ""}`}>
                       <ChevronDown />
                     </span>
                   </button>
-
                   {mobileExpanded === group.label && (
                     <div className="mobile-group-items">
                       {group.items.map((item) => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          className="mobile-menu-item"
-                          onClick={closeAll}
-                        >
+                        <Link key={item.href} href={item.href} className="mobile-menu-item" onClick={closeAll}>
                           <span className="mobile-item-label">{item.label}</span>
                           <span className="mobile-item-desc">{item.desc}</span>
                         </Link>
