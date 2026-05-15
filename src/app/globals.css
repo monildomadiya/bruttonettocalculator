@@ -5,7 +5,18 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  /* Prevent any single element from causing horizontal overflow */
+}
+
+/* min-width:0 ONLY on flex/grid children — NOT on table cells (they'd collapse) */
+.content-area > *,
+.calc-panels > *,
+.hub-grid > *,
+.footer-grid > *,
+.form-row > *,
+.sidebar > *,
+.results-content > *,
+.header-actions > *,
+.footer-bottom > * {
   min-width: 0;
 }
 
@@ -787,9 +798,14 @@ body {
 
 .page-hero {
   background: var(--bg-page);
-  padding: 32px 0 24px;
+  padding: 28px 0 20px;
   border-bottom: 1px solid var(--border-color);
 }
+
+@media (max-width: 860px) {
+  .page-hero { padding: 16px 0 12px; }
+}
+
 
 .page-hero h1 {
   font-size: 28px;
@@ -1167,6 +1183,17 @@ body {
   width: 100%;
   border-collapse: collapse;
   font-size: 13px;
+  table-layout: fixed;
+}
+
+/* Left col: label takes ~60%, right col: value takes ~40% */
+.breakdown-table td:first-child {
+  width: 60%;
+  padding-right: 8px;
+}
+
+.breakdown-table td:last-child {
+  width: 40%;
 }
 
 .breakdown-table tr {
