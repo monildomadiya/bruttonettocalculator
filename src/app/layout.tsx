@@ -106,8 +106,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
-      </head>
-      <body>
         {/* Google Analytics */}
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-FY0K5KT32H" strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -118,7 +116,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             gtag('config', 'G-FY0K5KT32H');
           `}
         </Script>
-
+      </head>
+      <body>
         <ThemeProvider>
           <Header />
           {children}
