@@ -16,6 +16,9 @@ const nunito = Nunito_Sans({
 
 const s = CALCULATOR_SEO.hub;
 
+// ── Viewport: REQUIRED for correct mobile rendering ──
+export { viewport } from "@/lib/viewport";
+
 export const metadata: Metadata = {
   title: {
     default: s.title,
@@ -28,6 +31,7 @@ export const metadata: Metadata = {
   publisher: SITE_NAME,
   metadataBase: new URL(SITE_URL),
   alternates: {
+
     canonical: "/",
     languages: {
       "de-DE": "/",

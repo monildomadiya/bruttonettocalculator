@@ -5,7 +5,16 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  /* Prevent any single element from causing horizontal overflow */
+  min-width: 0;
 }
+
+/* Block-level elements must never exceed viewport width */
+img, svg, video, canvas, picture, iframe, embed, object {
+  max-width: 100%;
+  display: block;
+}
+
 
 :root {
   --bg-page: #f8f9fa;
@@ -91,7 +100,14 @@
   --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-html, body {
+html {
+  /* THE nuclear fix for horizontal scroll on mobile */
+  overflow-x: hidden;
+  /* Ensure viewport meta is respected */
+  width: 100%;
+}
+
+body {
   font-family: var(--font);
   background: var(--bg-page);
   color: var(--text-body);
@@ -100,7 +116,12 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
+  /* Contain width to viewport — prevents child overflow */
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
 }
+
 
 /* =========================================
    LAYOUT
@@ -108,9 +129,13 @@ html, body {
 
 .page-wrap {
   max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
   padding: 0 24px;
+  /* Safety: never exceed viewport */
+  box-sizing: border-box;
 }
+
 
 .content-area {
   display: grid;
@@ -2066,4 +2091,155 @@ html, body {
     font-size: 12px;
   }
 }
+
+/* =========================================
+   OVERFLOW CONTAINMENT — stops horizontal scroll on ALL devices
+   Applied LAST so it overrides everything above
+   ========================================= */
+
+/* Every layout wrapper: must not exceed 100% of its parent */
+.site-header,
+.site-header-inner,
+.header-inner-wrap,
+.mobile-menu,
+.mobile-menu-inner,
+.page-wrap,
+.page-hero,
+.content-area,
+.calc-card,
+.calc-panels,
+.calc-inputs,
+.calc-results,
+.sidebar,
+.sidebar-card,
+.seo-section,
+.hub-hero,
+.hub-content,
+.hub-grid,
+.hub-card,
+.site-footer,
+.footer-grid,
+.footer-bottom,
+.search-modal {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Grids: use minmax(0, 1fr) so cells never overflow their column */
+.content-area {
+  grid-template-columns: minmax(0, 1fr) 300px;
+}
+
+@media (max-width: 960px) {
+  .content-area {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.hub-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 900px) {
+  .hub-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 600px) {
+  .hub-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+.calc-panels {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+@media (max-width: 680px) {
+  .calc-panels { grid-template-columns: minmax(0, 1fr); }
+}
+
+.footer-grid {
+  grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr;
+}
+
+@media (max-width: 1024px) {
+  .footer-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 768px) {
+  .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 680px) {
+  .footer-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Form elements must never overflow their container */
+.form-row {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 680px) {
+  .form-row { grid-template-columns: minmax(0, 1fr); }
+}
+
+.form-input,
+.form-select,
+.btn-calculate,
+.header-search-pill,
+.mobile-search-trigger {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Tables: always inside a scrollable wrapper, never break layout */
+.seo-table {
+  /* min-width preserved for horizontal scroll WITHIN .table-wrap */
+  max-width: none;
+}
+
+.table-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Nav: prevent dropdown from causing page-level overflow */
+.nav-dropdown {
+  /* Clip to viewport edge if near screen edge */
+  max-width: calc(100vw - 32px);
+}
+
+/* Long text strings that could overflow */
+.hub-card-title,
+.hub-card-desc,
+.nav-dropdown-label,
+.nav-dropdown-desc,
+.sidebar-category-link,
+.footer-link,
+.page-hero h1,
+.page-hero p {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Fix: search overlay must not scroll body */
+.search-overlay {
+  width: 100vw;
+  max-width: 100vw;
+  left: 0;
+  right: 0;
+}
+
+/* Fix: progress bar must not overflow calc-results */
+.progress-bar-wrap {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* Fix: breakdown table rows must not overflow on tiny screens */
+.breakdown-table {
+  table-layout: auto;
+  width: 100%;
+}
+
 
