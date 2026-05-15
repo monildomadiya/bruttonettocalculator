@@ -27,8 +27,8 @@ body{overflow-x:hidden;width:100%;font-family:var(--font-nunito),'Inter',-apple-
 @media(min-width:960px){.content-area{grid-template-columns:1fr 280px;}}
 
 /* ── Header ── */
-.site-header{position:sticky;top:0;z-index:200;background:var(--bg-header);border-bottom:1px solid var(--border);height:52px;display:flex;align-items:center;}
-.header-inner-wrap{width:100%;}
+.site-header{position:sticky;top:0;z-index:200;background:var(--bg-header);border-bottom:1px solid var(--border);height:56px;display:flex;align-items:center;padding:0 16px;}
+.header-inner-wrap{width:100%;max-width:1120px;margin:0 auto;}
 .site-header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;}
 .logo{display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0;}
 .logo-icon-bg{width:28px;height:28px;border-radius:6px;background:var(--accent);display:flex;align-items:center;justify-content:center;}
@@ -135,13 +135,13 @@ body{overflow-x:hidden;width:100%;font-family:var(--font-nunito),'Inter',-apple-
 .row-total td{font-weight:700;color:var(--text-heading);border-top:2px solid var(--border);border-bottom:none;padding-top:10px;}
 
 /* ── Progress Bar ── */
-.progress-bar-wrap{margin:16px 0;}
-.progress-segments{display:flex;height:8px;border-radius:999px;overflow:hidden;gap:1px;}
+.progress-bar-wrap{margin:20px 0;}
+.progress-segments{display:flex;height:10px;border-radius:999px;overflow:hidden;gap:2px;}
 .progress-segment{height:100%;transition:var(--transition);}
-.progress-legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:10px;}
-.legend-item{display:flex;align-items:center;gap:5px;}
-.legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.legend-label{font-size:11px;color:var(--text-muted);}
+.progress-legend{display:flex;flex-wrap:wrap;gap:10px 16px;margin-top:14px;}
+.legend-item{display:flex;align-items:center;gap:6px;}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.legend-label{font-size:12px;color:var(--text-heading);font-weight:500;}
 
 /* ── SEO Section ── */
 .seo-section{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-top:16px;}
@@ -154,8 +154,8 @@ body{overflow-x:hidden;width:100%;font-family:var(--font-nunito),'Inter',-apple-
 .faq-item:last-child{border-bottom:none;}
 .faq-item h3{font-size:14px;font-weight:600;color:var(--text-heading);margin-bottom:6px;}
 .faq-item p{font-size:13px;color:var(--text-muted);margin:0;}
-.table-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0;}
-.seo-table{width:100%;border-collapse:collapse;font-size:13px;min-width:400px;}
+.table-wrap{width:100%;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:16px 0;border:1px solid var(--border);border-radius:var(--radius-sm);}
+.seo-table{width:100%;border-collapse:collapse;font-size:13px;min-width:500px;}
 .seo-table th{padding:8px 12px;text-align:left;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted);background:var(--bg-result);border-bottom:1px solid var(--border);}
 .seo-table td{padding:9px 12px;border-bottom:1px solid var(--border);color:var(--text);}
 .seo-table tr:last-child td{border-bottom:none;}
@@ -234,12 +234,13 @@ body{overflow-x:hidden;width:100%;font-family:var(--font-nunito),'Inter',-apple-
   .hub-grid{grid-template-columns:1fr!important;}
   .footer-grid{grid-template-columns:1fr!important;}
   .footer-bottom{flex-direction:column;align-items:flex-start;}
-  .calc-inputs,.calc-results{padding:14px 12px!important;}
-  .seo-section{padding:14px 12px!important;}
+  .calc-inputs,.calc-results{padding:16px!important;}
+  .seo-section{padding:16px!important;}
+  .site-header{padding:0 12px;}
 }
 
 /* ── Safe area (iPhone notch) ── */
 @supports(padding:max(0px)){
-  .site-header{padding-left:max(0px,env(safe-area-inset-left));padding-right:max(0px,env(safe-area-inset-right));}
+  .site-header{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right));}
   .page-wrap{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right));}
 }
