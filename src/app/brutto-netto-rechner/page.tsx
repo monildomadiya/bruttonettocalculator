@@ -353,17 +353,19 @@ export default function HomePage() {
                 dieser Grenze ist beitragsfrei.
               </p>
               
-              <table className="seo-table">
-                <thead>
-                  <tr><th>Versicherungsart</th><th>Gesamtbeitrag</th><th>Arbeitnehmeranteil ({YEAR})</th><th>BBG West (p.a.)</th></tr>
-                </thead>
-                <tbody>
-                  <tr><td><strong>Krankenversicherung (GKV)</strong></td><td>14,6% + Zusatzbeitrag</td><td>7,3% + ½ individueller Zusatzbeitrag</td><td>62.100 €</td></tr>
-                  <tr><td><strong>Rentenversicherung (RV)</strong></td><td>18,6%</td><td>9,3%</td><td>90.600 €</td></tr>
-                  <tr><td><strong>Arbeitslosenversicherung (AV)</strong></td><td>2,6%</td><td>1,3%</td><td>90.600 €</td></tr>
-                  <tr><td><strong>Pflegeversicherung (PV)</strong></td><td>3,4% - 4,0%</td><td>1,7% - 2,3% (kinderlos, ab 23 J. höher)</td><td>62.100 €</td></tr>
-                </tbody>
-              </table>
+              <div className="table-wrap">
+                <table className="seo-table">
+                  <thead>
+                    <tr><th>Versicherungsart</th><th>Gesamtbeitrag</th><th>Arbeitnehmeranteil ({YEAR})</th><th>BBG West (p.a.)</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><strong>Krankenversicherung (GKV)</strong></td><td>14,6% + Zusatzbeitrag</td><td>7,3% + ½ individueller Zusatzbeitrag</td><td>62.100 €</td></tr>
+                    <tr><td><strong>Rentenversicherung (RV)</strong></td><td>18,6%</td><td>9,3%</td><td>90.600 €</td></tr>
+                    <tr><td><strong>Arbeitslosenversicherung (AV)</strong></td><td>2,6%</td><td>1,3%</td><td>90.600 €</td></tr>
+                    <tr><td><strong>Pflegeversicherung (PV)</strong></td><td>3,4% - 4,0%</td><td>1,7% - 2,3% (kinderlos, ab 23 J. höher)</td><td>62.100 €</td></tr>
+                  </tbody>
+                </table>
+              </div>
 
               <h3>Welche Rolle spielt die Steuerklasse bei der Nettoberechnung?</h3>
               <p>

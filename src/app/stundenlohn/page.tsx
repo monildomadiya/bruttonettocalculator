@@ -148,18 +148,20 @@ export default function StundenlohnPage() {
               </p>
 
               <h3>Stundenlohn-Vergleichstabelle nach Jahresgehalt</h3>
-              <table className="seo-table">
-                <thead>
-                  <tr><th>Jahresgehalt (brutto)</th><th>Monatsgehalt (brutto)</th><th>Stundenlohn (40h-Woche)</th><th>Stundenlohn (35h-Woche)</th></tr>
-                </thead>
-                <tbody>
-                  <tr><td>24.000 €</td><td>2.000 €</td><td>ca. 11,54 €</td><td>ca. 13,19 €</td></tr>
-                  <tr><td>36.000 €</td><td>3.000 €</td><td>ca. 17,31 €</td><td>ca. 19,78 €</td></tr>
-                  <tr><td>48.000 €</td><td>4.000 €</td><td>ca. 23,08 €</td><td>ca. 26,37 €</td></tr>
-                  <tr><td>60.000 €</td><td>5.000 €</td><td>ca. 28,85 €</td><td>ca. 32,97 €</td></tr>
-                  <tr><td>80.000 €</td><td>6.667 €</td><td>ca. 38,47 €</td><td>ca. 43,96 €</td></tr>
-                </tbody>
-              </table>
+              <div className="table-wrap">
+                <table className="seo-table">
+                  <thead>
+                    <tr><th>Jahresgehalt (brutto)</th><th>Monatsgehalt (brutto)</th><th>Stundenlohn (40h-Woche)</th><th>Stundenlohn (35h-Woche)</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>24.000 €</td><td>2.000 €</td><td>ca. 11,54 €</td><td>ca. 13,19 €</td></tr>
+                    <tr><td>36.000 €</td><td>3.000 €</td><td>ca. 17,31 €</td><td>ca. 19,78 €</td></tr>
+                    <tr><td>48.000 €</td><td>4.000 €</td><td>ca. 23,08 €</td><td>ca. 26,37 €</td></tr>
+                    <tr><td>60.000 €</td><td>5.000 €</td><td>ca. 28,85 €</td><td>ca. 32,97 €</td></tr>
+                    <tr><td>80.000 €</td><td>6.667 €</td><td>ca. 38,47 €</td><td>ca. 43,96 €</td></tr>
+                  </tbody>
+                </table>
+              </div>
 
               <h3>Warum ist die Wochenarbeitszeit so entscheidend?</h3>
               <p>

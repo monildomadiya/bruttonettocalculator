@@ -968,11 +968,18 @@ html, body {
   margin-bottom: 4px;
 }
 
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  margin: 16px 0;
+  -webkit-overflow-scrolling: touch;
+}
+
 .seo-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 13px;
-  margin: 12px 0;
+  min-width: 600px;
 }
 
 .seo-table th {

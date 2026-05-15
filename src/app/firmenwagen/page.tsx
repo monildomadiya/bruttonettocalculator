@@ -153,16 +153,18 @@ export default function FirmenwagenPage() {
               <p>
                 Als Anreiz zur Förderung klimafreundlicher Mobilität gelten für elektrische und hybride Fahrzeuge deutlich günstigere Steuersätze:
               </p>
-              <table className="seo-table">
-                <thead>
-                  <tr><th>Fahrzeugtyp</th><th>Steuersatz</th><th>Voraussetzung</th><th>Ersparnis vs. Verbrenner</th></tr>
-                </thead>
-                <tbody>
-                  <tr><td><strong>Reines Elektroauto (BEV)</strong></td><td>0,25%</td><td>Bruttolistenpreis max. 70.000 €</td><td>75% Steuerersparnis</td></tr>
-                  <tr><td><strong>Plug-in-Hybrid (PHEV)</strong></td><td>0,50%</td><td>Mindest-E-Reichweite 60 km (ab 2025)</td><td>50% Steuerersparnis</td></tr>
-                  <tr><td><strong>Verbrenner / konventionell</strong></td><td>1,00%</td><td>Standard</td><td>—</td></tr>
-                </tbody>
-              </table>
+              <div className="table-wrap">
+                <table className="seo-table">
+                  <thead>
+                    <tr><th>Fahrzeugtyp</th><th>Steuersatz</th><th>Voraussetzung</th><th>Ersparnis vs. Verbrenner</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><strong>Reines Elektroauto (BEV)</strong></td><td>0,25%</td><td>Bruttolistenpreis max. 70.000 €</td><td>75% Steuerersparnis</td></tr>
+                    <tr><td><strong>Plug-in-Hybrid (PHEV)</strong></td><td>0,50%</td><td>Mindest-E-Reichweite 60 km (ab 2025)</td><td>50% Steuerersparnis</td></tr>
+                    <tr><td><strong>Verbrenner / konventionell</strong></td><td>1,00%</td><td>Standard</td><td>—</td></tr>
+                  </tbody>
+                </table>
+              </div>
               <p>
                 Bei einem Elektroauto mit einem Listenpreis von 50.000 Euro beträgt der monatliche geldwerte Vorteil nur 125 Euro statt 500 Euro. Das ist ein massiver Unterschied — sowohl für die monatliche Steuerlast des Arbeitnehmers als auch für die Gesamtkosten des Arbeitgebers.
               </p>
