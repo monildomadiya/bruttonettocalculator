@@ -2263,4 +2263,100 @@ body {
   width: 100%;
 }
 
+/* ─────────────────────────────────────────────────────
+   FINAL MOBILE OVERRIDES — highest specificity zone
+   These run last and fix mobile-specific layout bugs
+   ───────────────────────────────────────────────────── */
 
+@media (max-width: 860px) {
+
+  /* Calc inputs: always full width, stacked */
+  .calc-panels {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .calc-inputs {
+    width: 100% !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border-color) !important;
+  }
+  .calc-results {
+    width: 100% !important;
+  }
+
+  /* Period toggle: make it a readable 2-button row */
+  .unit-tabs {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* All form rows stack on mobile */
+  .form-row {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Inputs: larger tap targets, no iOS zoom */
+  .form-input,
+  .form-select {
+    height: 46px !important;
+    font-size: 16px !important;
+  }
+
+  /* Sidebar below calculator: single column */
+  .sidebar {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  /* Page padding */
+  .page-wrap {
+    padding: 0 14px !important;
+  }
+
+  /* Hero */
+  .page-hero { padding: 18px 0 14px !important; }
+  .page-hero h1 { font-size: 20px !important; }
+
+  /* Hub grid: 2 col on tablet */
+  .hub-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Hub grid: 1 col on small phones */
+  .hub-grid { grid-template-columns: 1fr !important; }
+
+  /* Very tight padding */
+  .page-wrap { padding: 0 10px !important; }
+
+  /* Hero title */
+  .page-hero h1 { font-size: 17px !important; }
+
+  /* Result amount */
+  .result-hero-amount { font-size: 30px !important; }
+
+  /* Footer: single col */
+  .footer-grid { grid-template-columns: 1fr !important; }
+  .footer-bottom { flex-direction: column !important; }
+  .footer-legal-links { flex-wrap: wrap !important; gap: 10px !important; }
+
+  /* Calc card inner */
+  .calc-inputs, .calc-results { padding: 12px 10px !important; }
+
+  /* SEO section */
+  .seo-section { padding: 14px 10px !important; }
+}
+
+/* iPhone notch / safe area */
+@supports (padding: max(0px)) {
+  .site-header {
+    padding-left:  max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+  .page-wrap {
+    padding-left:  max(14px, env(safe-area-inset-left));
+    padding-right: max(14px, env(safe-area-inset-right));
+  }
+}
