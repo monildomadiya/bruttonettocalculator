@@ -2125,15 +2125,9 @@ body {
   box-sizing: border-box;
 }
 
-/* Grids: use minmax(0, 1fr) so cells never overflow their column */
+/* ── Grids: minmax(0,1fr) prevents cell overflow ── */
 .content-area {
   grid-template-columns: minmax(0, 1fr) 300px;
-}
-
-@media (max-width: 960px) {
-  .content-area {
-    grid-template-columns: minmax(0, 1fr);
-  }
 }
 
 .hub-grid {
