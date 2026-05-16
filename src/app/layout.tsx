@@ -40,6 +40,15 @@ export const metadata: Metadata = {
   creator:   SITE_NAME,
   publisher: SITE_NAME,
   metadataBase: new URL(SITE_URL),
+  icons: {
+    icon: [
+      { url: "/favicon.png", type: "image/png" }
+    ],
+    shortcut: ["/favicon.png"],
+    apple: [
+      { url: "/favicon.png", type: "image/png" }
+    ],
+  },
   alternates: {
 
     canonical: "/",

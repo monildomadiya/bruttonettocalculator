@@ -63,9 +63,8 @@ export default function Footer() {
 
           {/* Brand column */}
           <div className="footer-brand">
-            <Link href="/" className="logo" style={{ marginBottom: "12px" }}>
-              <span className="logo-icon-bg"><span className="logo-icon-text">&#8364;</span></span>
-              <span className="logo-name">bruttonettocalculator</span>
+            <Link href="/" className="logo" style={{ marginBottom: "12px", display: "flex", alignItems: "center" }}>
+              <img src="/logo.png" alt="bruttonettocalculator Logo" style={{ height: "48px", width: "auto" }} />
             </Link>
             <p>
               Präzise Gehalts- und Steuerrechner für Deutschland. Kostenlos, ohne Anmeldung, immer aktuell.

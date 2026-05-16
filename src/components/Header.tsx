@@ -247,9 +247,8 @@ export default function Header() {
           <div className="site-header-inner">
 
             {/* ── Logo ── */}
-            <Link href="/" className="logo" onClick={closeAll} aria-label="Startseite">
-              <span className="logo-icon-bg"><span className="logo-icon-text">&#8364;</span></span>
-              <span className="logo-name">bruttonettocalculator</span>
+            <Link href="/" className="logo" onClick={closeAll} aria-label="Startseite" style={{ display: "flex", alignItems: "center" }}>
+              <img src="/logo.png" alt="bruttonettocalculator Logo" style={{ height: "48px", width: "auto" }} />
             </Link>
 
             {/* ── Desktop Nav ── */}
@@ -274,14 +273,22 @@ export default function Header() {
 
             {/* ── Right actions ── */}
             <div className="header-actions">
-              <button className="header-search-pill" onClick={() => setSearchOpen(true)} aria-label="Suchen">
-                <SearchIcon size={14} />
-                <span className="search-pill-text">Suchen...</span>
-                <kbd style={{ marginLeft: "6px", fontSize: "10px", opacity: 0.6 }}>/</kbd>
+              <button className="theme-toggle-switch" onClick={toggle} aria-label={isDark ? "Hellmodus" : "Dunkelmodus"}>
+                <span className={`toggle-icon ${!isDark ? "active" : ""}`}>
+                  <SunIcon size={16} />
+                </span>
+                <span className={`toggle-icon ${isDark ? "active" : ""}`}>
+                  <MoonIcon size={16} />
+                </span>
+                <div className={`toggle-slider ${isDark ? "dark" : ""}`} />
               </button>
-              <button className="header-icon-btn" onClick={toggle} aria-label={isDark ? "Hellmodus" : "Dunkelmodus"}>
-                {isDark ? <SunIcon /> : <MoonIcon />}
+              
+              <div className="header-separator hidden-mobile"></div>
+              
+              <button className="header-search-square hidden-mobile" onClick={() => setSearchOpen(true)} aria-label="Suchen">
+                <SearchIcon size={18} />
               </button>
+
               <button className="header-icon-btn mobile-menu-btn" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Menu">
                 {mobileOpen ? <CloseIcon /> : <HamburgerIcon />}
               </button>
