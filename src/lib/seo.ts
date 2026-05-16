@@ -51,7 +51,7 @@ export const CALCULATOR_SEO: Record<string, {
     keywords:    [
       "Brutto Netto Rechner", "Nettogehalt berechnen", `Gehaltsrechner ${YEAR}`,
       `Lohnsteuer ${YEAR}`, "Steuerklassen", "Sozialabgaben", "Nettolohn berechnen",
-      "Brutto Netto ${YEAR}", "Gehaltsabrechnung", "Lohnabrechnung online",
+      `Brutto Netto ${YEAR}`, "Gehaltsabrechnung", "Lohnabrechnung online",
     ],
     path:        "/brutto-netto-rechner",
   },
@@ -131,5 +131,40 @@ export const CALCULATOR_SEO: Record<string, {
     description: `Urlaubsgeldrechner ${YEAR}: Wie viel Netto bleibt vom Urlaubsgeld? Steuer- & SV-Abzüge auf Ihre Sonderzahlung nach Steuerklasse sofort & kostenlos berechnen.`,
     keywords:    ["Urlaubsgeldrechner", "Urlaubsgeld Netto", "Sonderzahlung versteuern", `Urlaubsgeld ${YEAR}`, "Urlaubsgeld Berechnung", "Netto Urlaubsgeld"],
     path:        "/urlaubsgeld",
+  },
+
+  minijob: {
+    title:       `Minijob Rechner ${YEAR} | Verdienstgrenze & Abgaben sofort berechnen`,
+    description: `Minijob Rechner ${YEAR}: Liegt Ihr Gehalt unter der 556-€-Grenze? Arbeitnehmer- & Arbeitgeberbeiträge, Rentenversicherungsoption und Netto sofort ermitteln.`,
+    keywords:    ["Minijob Rechner", "Minijob berechnen", `Minijob ${YEAR}`, "Minijob Verdienstgrenze", "556 Euro Grenze", "geringfügige Beschäftigung", "Minijob Abgaben"],
+    path:        "/minijob",
+  },
+
+  weihnachtsgeld: {
+    title:       `Weihnachtsgeld Rechner ${YEAR} | Netto-Weihnachtsgeld sofort berechnen`,
+    description: `Weihnachtsgeld Rechner ${YEAR}: Wie viel Netto bleibt vom Weihnachtsgeld? Lohnsteuer & Sozialabgaben auf Ihre Sonderzahlung nach Steuerklasse sofort berechnen.`,
+    keywords:    ["Weihnachtsgeld Rechner", `Weihnachtsgeld ${YEAR}`, "Weihnachtsgeld Netto", "Weihnachtsgeld berechnen", "Weihnachtsgeld Steuer", "13. Monatsgehalt"],
+    path:        "/weihnachtsgeld",
+  },
+
+  krankengeld: {
+    title:       `Krankengeldrechner ${YEAR} | Anspruch & Höhe berechnen`,
+    description: `Krankengeldrechner ${YEAR}: Wie viel Krankengeld erhalten Sie nach 6 Wochen Krankheit? Netto-Krankengeld Abzüge sofort & kostenlos berechnen.`,
+    keywords:    ["Krankengeldrechner", `Krankengeld ${YEAR}`, "Krankengeld berechnen", "Krankengeld Netto", "Krankengeld Abzüge", "6 Wochen krank"],
+    path:        "/krankengeld",
+  },
+
+  abfindung: {
+    title:       `Abfindungsrechner ${YEAR} | Steuer nach Fünftelregelung berechnen`,
+    description: `Abfindungsrechner ${YEAR}: Berechnen Sie die Steuern auf Ihre Abfindung. Wie viel Netto bleibt durch die Fünftelregelung? Sofort & kostenlos ermitteln.`,
+    keywords:    ["Abfindungsrechner", "Abfindung versteuern", "Fünftelregelung", `Abfindung ${YEAR}`, "Abfindung Netto", "Steuer auf Abfindung", "Kündigung Abfindung"],
+    path:        "/abfindung",
+  },
+
+  elterngeld: {
+    title:       `Elterngeld Rechner ${YEAR} | Elterngeld & ElterngeldPlus berechnen`,
+    description: `Elterngeld Rechner ${YEAR}: Basis-Elterngeld & ElterngeldPlus aus Nettoeinkommen berechnen. Anspruchsdauer, Geschwisterbonus & Mehrlingszuschlag – kostenlos & sofort.`,
+    keywords:    ["Elterngeld Rechner", `Elterngeld ${YEAR}`, "Elterngeld berechnen", "ElterngeldPlus", "Basiselterngeld", "Elterngeld Höhe", "Elterngeld Anspruch"],
+    path:        "/elterngeld",
   },
 };

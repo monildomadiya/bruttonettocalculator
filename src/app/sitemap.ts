@@ -13,9 +13,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: '/netto-brutto',         priority: 0.95, changeFrequency: 'weekly'  as const },
     { url: '/stundenlohn',          priority: 0.92, changeFrequency: 'weekly'  as const },
     { url: '/arbeitgeber',          priority: 0.90, changeFrequency: 'weekly'  as const },
+    { url: '/minijob',              priority: 0.93, changeFrequency: 'weekly'  as const },
 
     // Tier 2 — High-value long-tail pages
     { url: '/firmenwagen',          priority: 0.90, changeFrequency: 'weekly'  as const },
+    { url: '/elterngeld',           priority: 0.90, changeFrequency: 'weekly'  as const },
+    { url: '/weihnachtsgeld',       priority: 0.88, changeFrequency: 'weekly'  as const },
     { url: '/arbeitslosengeld',     priority: 0.88, changeFrequency: 'weekly'  as const },
     { url: '/kurzarbeitergeld',     priority: 0.88, changeFrequency: 'weekly'  as const },
     { url: '/rente',                priority: 0.87, changeFrequency: 'weekly'  as const },

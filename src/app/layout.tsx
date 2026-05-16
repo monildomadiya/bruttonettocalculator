@@ -84,16 +84,8 @@ export const metadata: Metadata = {
   },
 
   other: {
-    "dc.title":       s.title,
-    "dc.description": s.description,
-    "dc.language":    "de",
-    "dc.rights":      `Copyright ${YEAR} ${SITE_NAME}`,
-    "dc.subject":     `Gehaltsrechner, Lohnrechner, Steuer ${YEAR}, Deutschland`,
-    "revisit-after":  "3 days",
     "geo.region":     "DE",
     "geo.placename":  "Deutschland",
-    "rating":         "general",
-    "language":       "German",
   },
 };
 
@@ -144,22 +136,31 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "description": `Alle kostenlosen Finanz-Rechner für Deutschland ${YEAR}: Brutto-Netto, Stundenlohn, Firmenwagen, Rente & mehr.`,
     "inLanguage": "de-DE",
     "hasPart": [
-      { "@type": "WebApplication", "name": "Brutto-Netto-Rechner",  "url": `${SITE_URL}/brutto-netto-rechner` },
-      { "@type": "WebApplication", "name": "Netto-Brutto-Rechner",  "url": `${SITE_URL}/netto-brutto` },
-      { "@type": "WebApplication", "name": "Stundenlohnrechner",    "url": `${SITE_URL}/stundenlohn` },
-      { "@type": "WebApplication", "name": "Firmenwagenrechner",    "url": `${SITE_URL}/firmenwagen` },
-      { "@type": "WebApplication", "name": "Kurzarbeitergeld",      "url": `${SITE_URL}/kurzarbeitergeld` },
-      { "@type": "WebApplication", "name": "Arbeitslosengeld I",    "url": `${SITE_URL}/arbeitslosengeld` },
-      { "@type": "WebApplication", "name": "Rentenrechner",         "url": `${SITE_URL}/rente` },
-      { "@type": "WebApplication", "name": "Pendlerpauschale",      "url": `${SITE_URL}/pendlerpauschale` },
+      { "@type": "WebApplication", "name": "Brutto-Netto-Rechner",   "url": `${SITE_URL}/brutto-netto-rechner` },
+      { "@type": "WebApplication", "name": "Netto-Brutto-Rechner",   "url": `${SITE_URL}/netto-brutto` },
+      { "@type": "WebApplication", "name": "Stundenlohnrechner",     "url": `${SITE_URL}/stundenlohn` },
+      { "@type": "WebApplication", "name": "Arbeitgeberrechner",     "url": `${SITE_URL}/arbeitgeber` },
+      { "@type": "WebApplication", "name": "Minijob Rechner",        "url": `${SITE_URL}/minijob` },
+      { "@type": "WebApplication", "name": "Firmenwagenrechner",     "url": `${SITE_URL}/firmenwagen` },
+      { "@type": "WebApplication", "name": "Pendlerpauschale",       "url": `${SITE_URL}/pendlerpauschale` },
+      { "@type": "WebApplication", "name": "Abfindungsrechner",      "url": `${SITE_URL}/abfindung` },
+      { "@type": "WebApplication", "name": "Schenkungssteuer",       "url": `${SITE_URL}/schenkungssteuer` },
+      { "@type": "WebApplication", "name": "Kurzarbeitergeld",       "url": `${SITE_URL}/kurzarbeitergeld` },
+      { "@type": "WebApplication", "name": "Arbeitslosengeld I",     "url": `${SITE_URL}/arbeitslosengeld` },
+      { "@type": "WebApplication", "name": "Krankengeldrechner",     "url": `${SITE_URL}/krankengeld` },
+      { "@type": "WebApplication", "name": "Urlaubsgeldrechner",     "url": `${SITE_URL}/urlaubsgeld` },
+      { "@type": "WebApplication", "name": "Weihnachtsgeld Rechner", "url": `${SITE_URL}/weihnachtsgeld` },
+      { "@type": "WebApplication", "name": "Elterngeld Rechner",     "url": `${SITE_URL}/elterngeld` },
+      { "@type": "WebApplication", "name": "Rentenrechner",          "url": `${SITE_URL}/rente` },
+      { "@type": "WebApplication", "name": "Rentenpunkte Rechner",   "url": `${SITE_URL}/rentenpunkte` },
     ],
   };
 
   return (
-    <html lang="de-DE" className={nunito.variable} data-theme="dark" suppressHydrationWarning>
+    <html lang="de-DE" className={nunito.variable} data-theme="light" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var s=localStorage.getItem('theme');if(s)document.documentElement.setAttribute('data-theme',s);else document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();` }} />
+        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var s=localStorage.getItem('theme');if(s)document.documentElement.setAttribute('data-theme',s);else document.documentElement.setAttribute('data-theme','light');}catch(e){}})();` }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />

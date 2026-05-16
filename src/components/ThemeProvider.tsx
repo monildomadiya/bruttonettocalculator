@@ -5,18 +5,18 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 type Theme = "light" | "dark";
 
 const ThemeContext = createContext<{ theme: Theme; toggle: () => void }>({
-  theme: "dark",
+  theme: "light",
   toggle: () => {},
 });
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  // Default is DARK — overridden by saved preference or system preference
-  const [theme, setTheme] = useState<Theme>("dark");
+  // Default is LIGHT — overridden by saved preference
+  const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
     const saved = localStorage.getItem("theme") as Theme | null;
-    // If user has never visited: use dark as default (not system preference)
-    const initial: Theme = saved ?? "dark";
+    // If user has never visited: use light as default
+    const initial: Theme = saved ?? "light";
     setTheme(initial);
     document.documentElement.setAttribute("data-theme", initial);
   }, []);

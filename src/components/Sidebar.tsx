@@ -8,12 +8,17 @@ const TOOLS = [
   { href: "/firmenwagen", label: "Firmenwagenrechner", desc: "Geldwerter Vorteil" },
   { href: "/kurzarbeitergeld", label: "Kurzarbeitergeld", desc: "KUG berechnen" },
   { href: "/arbeitslosengeld", label: "Arbeitslosengeld I", desc: "ALG I Anspruch" },
+  { href: "/krankengeld", label: "Krankengeldrechner", desc: "Krankengeld berechnen" },
+  { href: "/weihnachtsgeld", label: "Weihnachtsgeld", desc: "Netto-Weihnachtsgeld" },
+  { href: "/urlaubsgeld", label: "Urlaubsgeldrechner", desc: "Urlaubsgeld netto" },
+  { href: "/elterngeld", label: "Elterngeld Rechner", desc: "Elterngeld berechnen" },
+  { href: "/minijob", label: "Minijob Rechner", desc: "556-€-Grenze prüfen" },
   { href: "/rente", label: "Rentenrechner", desc: "Voraussichtliche Rente" },
   { href: "/rentenpunkte", label: "Rentenpunkte", desc: "Punkte berechnen" },
   { href: "/arbeitgeber", label: "Arbeitgeberrechner", desc: "Gesamtlohnkosten" },
   { href: "/pendlerpauschale", label: "Pendlerpauschale", desc: "Fahrtkosten absetzen" },
+  { href: "/abfindung", label: "Abfindungsrechner", desc: "Abfindung berechnen" },
   { href: "/schenkungssteuer", label: "Schenkungssteuer", desc: "Steuer bei Schenkung" },
-  { href: "/urlaubsgeld", label: "Urlaubsgeldrechner", desc: "Urlaubsgeld netto" },
 ];
 
 export default function Sidebar() {

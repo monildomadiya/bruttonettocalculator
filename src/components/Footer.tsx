@@ -17,6 +17,7 @@ const FOOTER_COLS = [
     links: [
       { href: "/firmenwagen", label: "Firmenwagenrechner" },
       { href: "/pendlerpauschale", label: "Pendlerpauschale" },
+      { href: "/abfindung", label: "Abfindungsrechner" },
       { href: "/schenkungssteuer", label: "Schenkungssteuer" },
     ],
   },
@@ -25,7 +26,11 @@ const FOOTER_COLS = [
     links: [
       { href: "/kurzarbeitergeld", label: "Kurzarbeitergeld" },
       { href: "/arbeitslosengeld", label: "Arbeitslosengeld I" },
-      { href: "/urlaubsgeld", label: "Urlaubsgeld" },
+      { href: "/krankengeld", label: "Krankengeldrechner" },
+      { href: "/urlaubsgeld",      label: "Urlaubsgeld" },
+      { href: "/weihnachtsgeld",   label: "Weihnachtsgeld" },
+      { href: "/elterngeld",       label: "Elterngeld" },
+      { href: "/minijob",          label: "Minijob Rechner" },
     ],
   },
   {
